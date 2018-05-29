@@ -5,6 +5,11 @@ ext {
             buildToolsVersion : "27.0.3"
     ]
 
+    sdkVersions = [
+            minSdkVersion : 15,
+            targetSdkVersion : 27
+    ]
+
     libraryVersions = [
             supportLibraries       : "27.1.1"
     ]
