@@ -8,8 +8,8 @@ android {
     buildToolsVersion buildVersions.buildToolsVersion
     defaultConfig {
         applicationId "com.phelat.splash"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion sdkVersions.minSdkVersion
+        targetSdkVersion sdkVersions.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,12 +33,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api project(":remote")
+    api project(":local")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
+
     androidTestImplementation "com.android.support.test:runner:$testLibraryVersions.supportTestRunner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$testLibraryVersions.espresso"
 
