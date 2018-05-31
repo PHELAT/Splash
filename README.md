@@ -1,1 +1,1 @@
-# Splash
+# Splash [![Build Status](https://travis-ci.com/PHELAT/Splash.svg?branch=master)](https://travis-ci.com/PHELAT/Splash)
