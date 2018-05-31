@@ -1,13 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
     compileSdkVersion buildVersions.compileSdkVersion
     buildToolsVersion buildVersions.buildToolsVersion
     defaultConfig {
-        applicationId "com.phelat.splash"
         minSdkVersion sdkVersions.minSdkVersion
         targetSdkVersion sdkVersions.targetSdkVersion
         versionCode 1
@@ -17,12 +15,10 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
-            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,18 +28,12 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api project(":remote")
-    api project(":local")
     api project(":data")
-    api project(":presentation")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
-
-    androidTestImplementation "com.android.support.test:runner:$testLibraryVersions.supportTestRunner"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$testLibraryVersions.espresso"
 
 }

@@ -1,0 +1,23 @@
+ext {
+
+    buildVersions = [
+            compileSdkVersion : 27,
+            buildToolsVersion : "27.0.3"
+    ]
+
+    sdkVersions = [
+            minSdkVersion : 15,
+            targetSdkVersion : 27
+    ]
+
+    libraryVersions = [
+            supportLibraries       : "27.1.1"
+    ]
+
+    testLibraryVersions = [
+            junit             : "4.12",
+            supportTestRunner : "1.0.2",
+            espresso          : "3.0.2"
+    ]
+
+}
