@@ -1,11 +1,9 @@
 package com.phelat.splash.remote.di
 
-import android.util.Log
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.phelat.splash.remote.BuildConfig
-import com.phelat.splash.remote.const.Network
 import com.phelat.splash.remote.di.scopes.ForNetwork
 import dagger.Module
 import dagger.Provides
@@ -22,7 +20,7 @@ import java.util.concurrent.TimeUnit
  */
 
 @Module
-class NetworkModule {
+class NetworkModule(private val baseUrl: String) {
 
     @Provides
     @ForNetwork
@@ -43,7 +41,8 @@ class NetworkModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor({ log ->
             if (BuildConfig.DEBUG) {
-                Log.i("OkHttp", log)
+                // TODO : USE A LOGGER CLASS
+                println("OkHttp $log")
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY)
     }
@@ -52,9 +51,9 @@ class NetworkModule {
     @ForNetwork
     fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
-                .readTimeout(Network.READ_TIME_OUT_SECONDS, TimeUnit.SECONDS)
-                .writeTimeout(Network.WRITE_TIME_OUT_SECONDS, TimeUnit.SECONDS)
-                .connectTimeout(Network.CONNECT_TIME_OUT_SECONDS, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .build()
     }
@@ -63,7 +62,7 @@ class NetworkModule {
     @ForNetwork
     fun provideRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(Network.BASE_URL)
+                .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

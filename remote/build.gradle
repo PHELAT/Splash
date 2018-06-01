@@ -50,5 +50,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$libraryVersions.dagger"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$libraryVersions.okHttp"
+    testImplementation "org.mockito:mockito-core:$testLibraryVersions.mockito"
 
 }
