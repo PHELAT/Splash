@@ -11,13 +11,19 @@ ext {
     ]
 
     libraryVersions = [
-            supportLibraries       : "27.1.1"
+            supportLibraries       : "27.1.1",
+            retrofit               : "2.4.0",
+            rxKotlin               : "2.2.0",
+            gson                   : "2.8.5",
+            okHttp                 : "3.10.0",
+            dagger                 : "2.16"
     ]
 
     testLibraryVersions = [
             junit             : "4.12",
             supportTestRunner : "1.0.2",
-            espresso          : "3.0.2"
+            espresso          : "3.0.2",
+            mockito           : "2.18.3"
     ]
 
 }
