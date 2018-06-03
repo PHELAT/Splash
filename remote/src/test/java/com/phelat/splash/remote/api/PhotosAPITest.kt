@@ -54,19 +54,6 @@ class PhotosAPITest {
 
     }
 
-    @Test
-    fun shouldThrowError() {
-
-        val response = MockResponse()
-        response.setResponseCode(500)
-        mockWebServer.enqueue(response)
-
-        api.getPhotos(0, 10)
-                .test()
-                .assertNotComplete()
-
-    }
-
     @After
     fun tearDown() {
         mockWebServer.shutdown()
