@@ -1,6 +1,6 @@
 package com.phelat.splash.remote.api
 
-import com.phelat.splash.remote.const.OrderBy
+import com.phelat.splash.data.const.OrderBy
 import com.phelat.splash.remote.response.PhotosResponse
 import io.reactivex.Single
 import retrofit2.http.GET

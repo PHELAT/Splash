@@ -1,4 +1,4 @@
-package com.phelat.splash.remote.const
+package com.phelat.splash.data.const
 
 /**
  * Created by MAHDi on 5/31/18.
