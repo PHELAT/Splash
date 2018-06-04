@@ -3,8 +3,8 @@ package com.phelat.splash.remote.datasource
 import com.phelat.splash.data.const.OrderBy
 import com.phelat.splash.data.datasource.DataSource
 import com.phelat.splash.data.request.GetPhotoRequest
+import com.phelat.splash.data.response.PhotosResponse
 import com.phelat.splash.remote.api.PhotosAPI
-import com.phelat.splash.remote.response.PhotosResponse
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
