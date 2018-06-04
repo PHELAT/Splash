@@ -16,7 +16,8 @@ ext {
             rxKotlin               : "2.2.0",
             gson                   : "2.8.5",
             okHttp                 : "3.10.0",
-            dagger                 : "2.16"
+            dagger                 : "2.16",
+            jsr                    : "1"
     ]
 
     testLibraryVersions = [

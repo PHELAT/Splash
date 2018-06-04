@@ -1,11 +1,11 @@
-package com.phelat.splash.remote.entity
+package com.phelat.splash.data.data
 
 /**
  * Created by MAHDi on 5/31/18.
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-data class ProfileImage(
+data class ProfileImageData(
 
         val small: String,
         val medium: String,

@@ -1,11 +1,11 @@
-package com.phelat.splash.remote.entity
+package com.phelat.splash.data.data
 
 /**
  * Created by MAHDi on 5/31/18.
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-data class Urls(
+data class PhotoUrlsData(
 
         val raw: String,
         val full: String,

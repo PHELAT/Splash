@@ -48,7 +48,7 @@ class PhotosAPITest {
                 .test()
                 .assertNoErrors()
                 .assertValue {
-                    it.size == 10 && it[0].user != null && it[0].urls != null && it[0].user.profileImage != null
+                    it.size == 10 && it[0].user != null && it[0].urls != null && it[0].user?.profileImage != null
                 }
                 .assertComplete()
 
