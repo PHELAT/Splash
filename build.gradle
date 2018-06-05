@@ -9,15 +9,17 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:3.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.dicedmelon.gradle:jacoco-android:0.1.2"
+        classpath 'org.jacoco:org.jacoco.core:0.8.1'
     }
 }
 
 allprojects {
+
     repositories {
         google()
         jcenter()
     }
+
     configurations {
         all {
             resolutionStrategy {
@@ -26,6 +28,14 @@ allprojects {
                 force "android.arch.lifecycle:viewmodel:$libraryVersions.architectureComponents"
             }
         }
+    }
+
+    apply plugin: 'jacoco'
+    jacoco {
+        toolVersion = '0.8.0'
+    }
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses = true
     }
 }
 
