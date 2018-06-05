@@ -1,0 +1,18 @@
+package com.phelat.splash.data.executors
+
+import com.phelat.splash.data.executors.base.SplashThread
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
+
+/**
+ * Created by MAHDi on 6/5/18.
+ * Contact me m4hdi.pdroid at gmail.com
+ */
+
+class BackgroundThread : SplashThread {
+
+    override fun getScheduler(): Scheduler {
+        return Schedulers.io()
+    }
+
+}
