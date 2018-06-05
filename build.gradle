@@ -1,3 +1,5 @@
+apply from: 'dependencies.gradle'
+
 buildscript {
     ext.kotlin_version = '1.2.41'
     repositories {
@@ -14,6 +16,15 @@ allprojects {
     repositories {
         google()
         jcenter()
+    }
+    configurations {
+        all {
+            resolutionStrategy {
+                force "android.arch.lifecycle:runtime:$libraryVersions.architectureComponents"
+                force "android.arch.lifecycle:livedata-core:$libraryVersions.architectureComponents"
+                force "android.arch.lifecycle:viewmodel:$libraryVersions.architectureComponents"
+            }
+        }
     }
 }
 

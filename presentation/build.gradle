@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 android {
@@ -30,10 +31,15 @@ dependencies {
 
     api project(":data")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$libraryVersions.rxKotlin"
 
-    implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
+    implementation "android.arch.lifecycle:extensions:$libraryVersions.architectureComponents"
+    kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
+
+    implementation "javax.inject:javax.inject:$libraryVersions.jsr"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
+    testImplementation "org.mockito:mockito-core:$testLibraryVersions.mockito"
+    testImplementation "android.arch.core:core-testing:$libraryVersions.architectureComponents"
 
 }
