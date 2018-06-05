@@ -35,6 +35,6 @@ install:
 env:
   - ANDROID_HOME=$HOME/android-sdk
 
-script: ./gradlew --no-daemon --parallel build lintDebug testDebug jacocoTestReport
+script: ./gradlew --no-daemon --parallel lintDebug testDebug jacocoTestReport
 
 after_success: bash <(curl -s https://codecov.io/bash)
