@@ -14,10 +14,12 @@ ext {
             supportLibraries       : "27.1.1",
             retrofit               : "2.4.0",
             rxKotlin               : "2.2.0",
+            rxAndroid              : "2.0.2",
             gson                   : "2.8.5",
             okHttp                 : "3.10.0",
             dagger                 : "2.16",
-            jsr                    : "1"
+            jsr                    : "1",
+            architectureComponents : "1.1.1"
     ]
 
     testLibraryVersions = [

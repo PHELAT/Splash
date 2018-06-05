@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 apply from: '../codequality/checkstyle.gradle'
 
@@ -38,9 +39,10 @@ dependencies {
     api project(":data")
     api project(":presentation")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
+
+    implementation "android.arch.lifecycle:runtime:$libraryVersions.architectureComponents"
+    kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
 
