@@ -7,9 +7,9 @@ import com.phelat.splash.presentation.view.BaseView
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-interface BasePresenter {
+interface BasePresenter<in View : BaseView<*>> {
 
-    fun subscribe(view: BaseView<*>)
+    fun subscribe(view: View)
 
     fun unsubscribe()
 
