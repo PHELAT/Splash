@@ -1,7 +1,7 @@
 package com.phelat.splash.data.entity
 
-import com.phelat.splash.data.data.PhotoUrlsData
-import com.phelat.splash.data.data.ProfileImageData
+import com.phelat.splash.data.model.PhotoUrlsData
+import com.phelat.splash.data.model.ProfileImageData
 
 /**
  * Created by MAHDi on 6/4/18.
