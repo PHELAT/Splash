@@ -9,11 +9,8 @@ import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.InjectMocks
-import org.mockito.Mockito
+import org.mockito.*
 import org.mockito.Mockito.*
-import org.mockito.MockitoAnnotations
-import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
@@ -33,16 +30,14 @@ class PhotoListRepositoryTest {
     @InjectMocks
     lateinit var repository: PhotoListRepositoryImpl
 
+    @Mock
+    lateinit var photoResponse: PhotosResponse
+
     @Before
     fun setUp() {
 
         MockitoAnnotations.initMocks(this)
-    }
 
-    @Test
-    fun shouldReturnListOfPhotoEntities() {
-
-        val photoResponse = Mockito.mock(PhotosResponse::class.java)
         val listOfPhotosResponse = arrayListOf(photoResponse)
 
         `when`(remoteDataSource.read(Mockito.any()))
@@ -51,6 +46,10 @@ class PhotoListRepositoryTest {
         val photoEntity = Mockito.mock(PhotoEntity::class.java)
         `when`(photosResponseToPhotoEntity.mapFromTo(photoResponse))
                 .thenReturn(photoEntity)
+    }
+
+    @Test
+    fun shouldFetchPhotosFromRemoteDataSource() {
 
         repository.getListOfPhotos()
                 .test()
@@ -58,6 +57,16 @@ class PhotoListRepositoryTest {
                 .assertComplete()
 
         verify(remoteDataSource, times(1)).read()
+    }
+
+    @Test
+    fun shouldMapPhotosResponseToPhotoEntity() {
+
+        repository.getListOfPhotos()
+                .test()
+                .assertNoErrors()
+                .assertComplete()
+
         verify(photosResponseToPhotoEntity, times(1)).mapFromTo(photoResponse)
     }
 

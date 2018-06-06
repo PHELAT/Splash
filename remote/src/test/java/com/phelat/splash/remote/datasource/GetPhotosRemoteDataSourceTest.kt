@@ -53,7 +53,7 @@ class GetPhotosRemoteDataSourceTest {
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, atLeast(1)).getPhotos(input.page, input.perPage, input.orderBy)
+        verify(photosAPI, times(1)).getPhotos(input.page, input.perPage, input.orderBy)
     }
 
     @Test
@@ -71,7 +71,7 @@ class GetPhotosRemoteDataSourceTest {
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, atLeast(1)).getPhotos(0, 24, OrderBy.LATEST)
+        verify(photosAPI, times(1)).getPhotos(0, 24, OrderBy.LATEST)
     }
 
 }
