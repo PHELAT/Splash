@@ -1,4 +1,4 @@
-package com.phelat.splash.data.data
+package com.phelat.splash.data.model
 
 /**
  * Created by MAHDi on 5/31/18.

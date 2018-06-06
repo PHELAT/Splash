@@ -1,1 +1,1 @@
-# Splash [![Build Status](https://travis-ci.com/PHELAT/Splash.svg?branch=master)](https://travis-ci.com/PHELAT/Splash)
+# Splash [![Build Status](https://travis-ci.com/PHELAT/Splash.svg?branch=master)](https://travis-ci.com/PHELAT/Splash) [![codecov](https://codecov.io/gh/PHELAT/Splash/branch/master/graph/badge.svg)](https://codecov.io/gh/PHELAT/Splash)
