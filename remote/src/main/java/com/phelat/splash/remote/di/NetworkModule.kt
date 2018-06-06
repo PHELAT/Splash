@@ -20,7 +20,10 @@ import java.util.concurrent.TimeUnit
  */
 
 @Module
-class NetworkModule(private val baseUrl: String) {
+class NetworkModule(private val baseUrl: String,
+                    private val readTimeout: Long = 30,
+                    private val writeTimeout: Long = 60,
+                    private val connectTimeout: Long = 30) {
 
     @Provides
     @ForNetwork
@@ -51,9 +54,9 @@ class NetworkModule(private val baseUrl: String) {
     @ForNetwork
     fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .build()
     }
