@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 apply from: '../codequality/checkstyle.gradle'
+apply from: '../codecoverage/splashJacoco.gradle'
 
 android {
     compileSdkVersion buildVersions.compileSdkVersion
@@ -25,6 +26,7 @@ android {
         debug {
             minifyEnabled false
             shrinkResources false
+            testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
