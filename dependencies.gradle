@@ -12,6 +12,7 @@ ext {
 
     libraryVersions = [
             supportLibraries       : "27.1.1",
+            constraintLayout       : "1.1.1",
             retrofit               : "2.4.0",
             rxKotlin               : "2.2.0",
             rxAndroid              : "2.0.2",
