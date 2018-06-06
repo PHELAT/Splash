@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
+// TODO : APPLY CHECKSTYLE TO OTHER MODULES
 apply from: '../codequality/checkstyle.gradle'
 apply from: '../codecoverage/splashJacoco.gradle'
 
@@ -42,6 +43,7 @@ dependencies {
     api project(":presentation")
 
     implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
+    implementation "com.android.support.constraint:constraint-layout:$libraryVersions.constraintLayout"
 
     implementation "android.arch.lifecycle:runtime:$libraryVersions.architectureComponents"
     kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
