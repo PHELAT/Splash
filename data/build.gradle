@@ -1,6 +1,6 @@
 apply plugin: 'kotlin'
 apply from: '../dependencies.gradle'
-apply from: '../codecoverage/kotlincoverage.gradle'
+apply from: '../codecoverage/splashJacoco.gradle'
 
 dependencies {
 

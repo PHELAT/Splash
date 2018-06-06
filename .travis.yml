@@ -37,6 +37,6 @@ env:
 
 script:
   - ./gradlew clean assemble
-  - ./gradlew --no-daemon --parallel lintDebug splashJacocoTestReport
+  - ./gradlew --no-daemon --parallel lintDebug codeCoverageReport
 
 after_success: bash <(curl -s https://codecov.io/bash)
