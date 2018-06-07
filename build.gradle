@@ -55,6 +55,7 @@ detekt {
     defaultProfile {
         input = "$rootDir"
         config = "$rootDir/config/detekt/detektconfig.yml"
+        output = "$rootDir/build/reports/detekt/"
         filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
     }
 }
