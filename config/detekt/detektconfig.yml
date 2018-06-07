@@ -67,7 +67,7 @@ comments:
     searchInInnerObject: true
     searchInInnerInterface: true
   UndocumentedPublicFunction:
-    active: true
+    active: false
 
 complexity:
   active: true
