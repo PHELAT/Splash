@@ -3,8 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
-// TODO : APPLY CHECKSTYLE TO OTHER MODULES
-apply from: '../codequality/checkstyle.gradle'
 apply from: '../codecoverage/splashJacoco.gradle'
 
 android {
@@ -54,3 +52,5 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$testLibraryVersions.espresso"
 
 }
+
+preBuild.dependsOn rootProject.tasks."detektCheck"
