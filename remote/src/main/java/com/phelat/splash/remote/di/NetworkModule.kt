@@ -42,12 +42,12 @@ class NetworkModule(private val baseUrl: String,
     @Provides
     @ForNetwork
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor({ log ->
+        return HttpLoggingInterceptor { log ->
             if (BuildConfig.DEBUG) {
                 // TODO : USE A LOGGER CLASS
                 println("OkHttp $log")
             }
-        }).setLevel(HttpLoggingInterceptor.Level.BODY)
+        }.setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
     @Provides
