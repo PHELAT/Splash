@@ -273,7 +273,7 @@ potential-bugs:
   UnsafeCallOnNullableType:
     active: true
   UnsafeCast:
-    active: true
+    active: false
   UselessPostfixExpression:
     active: true
   WrongEqualsTypeParameter:
