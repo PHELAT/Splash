@@ -36,7 +36,6 @@ env:
   - ANDROID_HOME=$HOME/android-sdk
 
 script:
-  - ./gradlew clean assemble
-  - ./gradlew --no-daemon --parallel lintDebug codeCoverageReport
+  - ./gradlew clean assemble lintDebug
 
 after_success: bash <(curl -s https://codecov.io/bash)
