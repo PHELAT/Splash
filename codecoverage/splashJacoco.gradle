@@ -21,3 +21,5 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['test']) {
         csv.enabled false
     }
 }
+
+assemble.dependsOn "codeCoverageReport"
