@@ -20,7 +20,8 @@ ext {
             okHttp                 : "3.10.0",
             dagger                 : "2.16",
             jsr                    : "1",
-            architectureComponents : "1.1.1"
+            architectureComponents : "1.1.1",
+            picasso                : "2.5.2"
     ]
 
     testLibraryVersions = [
