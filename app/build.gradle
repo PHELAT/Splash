@@ -51,7 +51,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$libraryVersions.supportLibraries"
     implementation "com.android.support.constraint:constraint-layout:$libraryVersions.constraintLayout"
 
-    implementation "android.arch.lifecycle:runtime:$libraryVersions.architectureComponents"
+    implementation "android.arch.lifecycle:extensions:$libraryVersions.architectureComponents"
     kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
 
     implementation "com.squareup.picasso:picasso:$libraryVersions.picasso"
