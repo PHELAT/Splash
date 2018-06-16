@@ -11,18 +11,22 @@ import com.phelat.splash.remote.di.NetworkComponent
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-fun AppCompatActivity.splashComponent(): SplashComponent {
+val AppCompatActivity.splashComponent: SplashComponent
+    get() {
     return (this.application as SplashApplication).splashComponent
 }
 
-fun AppCompatActivity.networkComponent(): NetworkComponent {
+val AppCompatActivity.networkComponent: NetworkComponent
+    get() {
     return (this.application as SplashApplication).networkComponent
 }
 
-fun Fragment.splashComponent(): SplashComponent {
+val Fragment.splashComponent: SplashComponent
+    get() {
     return (this.activity?.application as SplashApplication).splashComponent
 }
 
-fun Fragment.networkComponent(): NetworkComponent {
+val Fragment.networkComponent: NetworkComponent
+    get() {
     return (this.activity?.application as SplashApplication).networkComponent
 }
