@@ -1,4 +1,4 @@
-package com.phelat.splash.photolist.view
+package com.phelat.splash.photolist.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
