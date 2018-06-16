@@ -12,6 +12,8 @@ android {
         applicationId "com.phelat.splash"
         minSdkVersion sdkVersions.minSdkVersion
         targetSdkVersion sdkVersions.targetSdkVersion
+        resConfigs "en"
+        vectorDrawables.useSupportLibrary true
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,6 +30,11 @@ android {
             testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(rootProject.file('splash.properties').newDataInputStream())
+        it.buildConfigField 'String', 'BASE_URL', properties.getProperty('baseUrl')
     }
 }
 
