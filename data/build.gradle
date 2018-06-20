@@ -1,9 +1,21 @@
-apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply from: '../dependencies.gradle'
+apply from: '../codecoverage/splashJacoco.gradle'
 
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$libraryVersions.rxKotlin"
+
+    implementation "javax.inject:javax.inject:$libraryVersions.jsr"
+
+    implementation "com.google.code.gson:gson:$libraryVersions.gson"
+
+    testImplementation "junit:junit:$testLibraryVersions.junit"
+    testImplementation "org.mockito:mockito-core:$testLibraryVersions.mockito"
 
 }
 

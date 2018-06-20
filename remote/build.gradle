@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
+apply from: '../codecoverage/splashJacoco.gradle'
 
 android {
     compileSdkVersion buildVersions.compileSdkVersion
@@ -14,13 +16,18 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(rootProject.file('local.properties').newDataInputStream())
+        it.buildConfigField 'String', 'CLIEND_ID', "\"${properties.getProperty('clientId')}\""
     }
 }
 
@@ -30,10 +37,24 @@ dependencies {
 
     api project(":data")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
 
+    implementation "com.squareup.retrofit2:retrofit:$libraryVersions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$libraryVersions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$libraryVersions.retrofit"
+
+    implementation "com.squareup.okhttp3:okhttp:$libraryVersions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$libraryVersions.okHttp"
+
+    implementation "com.google.code.gson:gson:$libraryVersions.gson"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$libraryVersions.rxKotlin"
+
+    implementation "com.google.dagger:dagger:$libraryVersions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$libraryVersions.dagger"
+
     testImplementation "junit:junit:$testLibraryVersions.junit"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$libraryVersions.okHttp"
+    testImplementation "org.mockito:mockito-core:$testLibraryVersions.mockito"
 
 }

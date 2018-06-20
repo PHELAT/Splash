@@ -1,21 +1,42 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# RxKotlin
+-dontwarn io.reactivex.internal.operators.**
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Kotlin
+-dontwarn kotlin.**
+-dontnote kotlin.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# OkHttp 3
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Gson
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+-keep class com.phelat.splash.data.model.** { *; }
+-keep class com.phelat.splash.data.entity.** { *; }
+-keep class com.phelat.splash.data.response.** { *; }
+
+# Retrofit
+-dontwarn retrofit2.Platform$Java8
+
+# Okio
+-dontwarn okio.**
+
+# Picasso
+-dontnote com.squareup.picasso.Utils
+-dontwarn com.squareup.picasso.OkHttpDownloader
+
+# Required rules for Retrofit and OkHttp
+-dontwarn javax.annotation.**
+
+# Required rules for Gson
+-dontwarn sun.misc.**
+-keepattributes *Annotation*
+-keepattributes Signature
+
+# Required rules for OkHttp
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# Required rules for Dagger
+-dontwarn com.google.errorprone.annotations.**
