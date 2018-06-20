@@ -24,6 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(rootProject.file('local.properties').newDataInputStream())
+        it.buildConfigField 'String', 'CLIEND_ID', "\"${properties.getProperty('clientId')}\""
+    }
 }
 
 dependencies {

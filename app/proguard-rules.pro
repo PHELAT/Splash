@@ -1,3 +1,6 @@
+# RxKotlin
+-dontwarn io.reactivex.internal.operators.**
+
 # Kotlin
 -dontwarn kotlin.**
 -dontnote kotlin.**

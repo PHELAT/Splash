@@ -12,6 +12,8 @@ android {
         applicationId "com.phelat.splash"
         minSdkVersion sdkVersions.minSdkVersion
         targetSdkVersion sdkVersions.targetSdkVersion
+        resConfigs "en"
+        vectorDrawables.useSupportLibrary true
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,6 +31,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(rootProject.file('splash.properties').newDataInputStream())
+        it.buildConfigField 'String', 'BASE_URL', properties.getProperty('baseUrl')
+    }
 }
 
 dependencies {
@@ -44,10 +51,15 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$libraryVersions.supportLibraries"
     implementation "com.android.support.constraint:constraint-layout:$libraryVersions.constraintLayout"
 
-    implementation "android.arch.lifecycle:runtime:$libraryVersions.architectureComponents"
+    implementation "android.arch.lifecycle:extensions:$libraryVersions.architectureComponents"
     kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
 
     implementation "com.squareup.picasso:picasso:$libraryVersions.picasso"
+
+    implementation "com.google.dagger:dagger:$libraryVersions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$libraryVersions.dagger"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$libraryVersions.rxKotlin"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
 

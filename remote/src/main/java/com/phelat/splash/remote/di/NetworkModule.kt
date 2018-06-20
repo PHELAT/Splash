@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.phelat.splash.remote.BuildConfig
 import com.phelat.splash.remote.di.scopes.ForNetwork
+import com.phelat.splash.remote.inceptors.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -24,6 +25,12 @@ class NetworkModule(private val baseUrl: String,
                     private val readTimeout: Long = 30,
                     private val writeTimeout: Long = 60,
                     private val connectTimeout: Long = 30) {
+
+    @Provides
+    @ForNetwork
+    fun providesAuthorizationInterceptor(): AuthorizationInterceptor {
+        return AuthorizationInterceptor()
+    }
 
     @Provides
     @ForNetwork
@@ -52,12 +59,14 @@ class NetworkModule(private val baseUrl: String,
 
     @Provides
     @ForNetwork
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
+                            authorizationInterceptor: AuthorizationInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
                 .readTimeout(readTimeout, TimeUnit.SECONDS)
                 .writeTimeout(writeTimeout, TimeUnit.SECONDS)
                 .connectTimeout(connectTimeout, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(authorizationInterceptor)
                 .build()
     }
 
