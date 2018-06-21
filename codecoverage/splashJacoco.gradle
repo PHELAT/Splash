@@ -8,16 +8,18 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['test']) {
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
     def javaClasses = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
     def kotlinClasses = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def kotlinClassesTwo = fileTree(dir: "$project.buildDir/classes/kotlin/", excludes: fileFilter)
     def javaSrc = "$project.projectDir/src/main/java"
     def kotlinSrc = "$project.projectDir/src/main/kotlin"
 
     sourceDirectories = files([javaSrc, kotlinSrc])
-    classDirectories = files([javaClasses, kotlinClasses])
+    classDirectories = files([javaClasses, kotlinClasses, kotlinClassesTwo])
 
     reports {
         xml.enabled true
-        xml.destination file("${buildDir}/reports/jacoco/report.xml")
-        html.enabled false
+        xml.destination file("${rootProject.buildDir}/reports/jacoco/${project.name}/report.xml")
+        html.enabled true
+        html.destination file("${rootProject.buildDir}/reports/jacoco/${project.name}/htmlReport")
         csv.enabled false
     }
 }
