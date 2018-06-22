@@ -1,6 +1,7 @@
 package com.phelat.splash
 
 import android.app.Application
+import android.support.v7.app.AppCompatDelegate
 import com.phelat.splash.di.DaggerSplashComponent
 import com.phelat.splash.di.SplashComponent
 import com.phelat.splash.di.SplashModule
@@ -21,6 +22,8 @@ class SplashApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         networkComponent = DaggerNetworkComponent.builder()
                 .networkModule(NetworkModule(BuildConfig.BASE_URL))

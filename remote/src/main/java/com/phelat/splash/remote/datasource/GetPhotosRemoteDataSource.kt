@@ -18,7 +18,7 @@ class GetPhotosRemoteDataSource @Inject constructor(private val api: PhotosAPI)
     override fun read(input: GetPhotoRequest?): Single<List<PhotosResponse>> {
         return input?.let { nonNullInput ->
             api.getPhotos(nonNullInput.page, nonNullInput.perPage, nonNullInput.orderBy)
-        } ?: api.getPhotos(0)
+        } ?: api.getPhotos(1)
     }
 
 }
