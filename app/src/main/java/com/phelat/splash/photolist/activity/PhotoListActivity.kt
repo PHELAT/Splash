@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.phelat.splash.R
 import com.phelat.splash.activity.SplashActivity
+import com.phelat.splash.data.entity.PhotoEntity
+import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.photopreview.adapter.PhotoPreviewAdapter
 import com.phelat.splash.presentation.photolist.contract.PhotoListContract
 import com.phelat.splash.presentation.photolist.viewmodel.PhotoListViewModel
@@ -25,12 +27,16 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
     @Inject
     lateinit var presenter: PhotoListContract.Presenter
 
+    @Inject
+    lateinit var emptyPhotoEntityProvider: Provider<PhotoEntity>
+
     private val photoListViewModel by viewModelProvider {
         PhotoListViewModel()
     }
 
     private val photoListPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        PhotoPreviewAdapter(supportFragmentManager, ArrayList())
+        val emptyPhotoEntity = emptyPhotoEntityProvider.provide()
+        PhotoPreviewAdapter(supportFragmentManager, arrayListOf(emptyPhotoEntity, emptyPhotoEntity))
     }
 
     private val offScreenPageLimit = 4
@@ -48,12 +54,8 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
         presenter.subscribe(this)
 
         photoListViewModel.photosObservable.observe(this, Observer { photoEntities ->
-            if (photoListPagerAdapter.shimmerMode) {
-                photoListPagerAdapter.shimmerMode = false
-            }
             photoEntities?.let { nonNullPhotoEntities ->
-                photoListPagerAdapter.items.clear()
-                photoListPagerAdapter.items.addAll(nonNullPhotoEntities)
+                photoListPagerAdapter.updateItems(nonNullPhotoEntities)
                 photoListPagerAdapter.notifyDataSetChanged()
             }
         })

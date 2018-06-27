@@ -28,7 +28,6 @@ class PhotoPreviewFragment : Fragment() {
 
         private const val ID = "id"
         private const val URL = "url"
-        private const val SHIMMER_MODE = "shimmerMode"
 
         fun instantiate(data: PhotoEntity): PhotoPreviewFragment {
 
@@ -65,9 +64,9 @@ class PhotoPreviewFragment : Fragment() {
         }
         colorAnim.start()
 
-        if (arguments?.getBoolean(SHIMMER_MODE) != true) {
+        if (arguments?.getString(URL, "") != "") {
             Picasso.with(activity?.applicationContext)
-                    .load(arguments?.getString(URL, ""))
+                    .load(arguments?.getString(URL))
                     .into(splash, object : Callback {
                         override fun onSuccess() {
                             splashCard.visibility = View.VISIBLE
@@ -81,6 +80,12 @@ class PhotoPreviewFragment : Fragment() {
                         }
                     })
         }
+    }
+
+    override fun onDestroyView() {
+        Picasso.with(activity?.applicationContext)
+                .cancelRequest(splash)
+        super.onDestroyView()
     }
 
 }

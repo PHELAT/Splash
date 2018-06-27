@@ -2,12 +2,10 @@ package com.phelat.splash.photopreview.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
-import android.view.ViewGroup
 import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.photopreview.fragment.PhotoPreviewFragment
-import com.phelat.splash.photopreview.fragment.PhotoPreviewShimmerFragment
 
 /**
  * Created by MAHDi on 6/21/18.
@@ -15,37 +13,34 @@ import com.phelat.splash.photopreview.fragment.PhotoPreviewShimmerFragment
  */
 
 class PhotoPreviewAdapter(fragmentManager: FragmentManager,
-                          val items: MutableList<PhotoEntity>,
-                          var shimmerMode: Boolean = true) : FragmentPagerAdapter(fragmentManager) {
+                          private val items: MutableList<PhotoEntity>) : FragmentStatePagerAdapter(fragmentManager) {
 
-    private lateinit var primaryItem: Fragment
+    private var pages = items.map { photoEntity ->
+        PhotoPreviewFragment.instantiate(photoEntity)
+    }
 
     override fun getItem(position: Int): Fragment {
-        return if (items.isEmpty() && shimmerMode) {
-            PhotoPreviewShimmerFragment()
-        } else {
-            PhotoPreviewFragment.instantiate(items[position])
-        }
+        return pages[position]
     }
 
     override fun getCount(): Int {
-        return if (items.isEmpty() && shimmerMode) 2 else items.size
+        return pages.size
     }
 
     override fun getPageWidth(position: Int): Float {
         return 0.8F
     }
 
-    override fun setPrimaryItem(container: ViewGroup, position: Int, any: Any) {
-        super.setPrimaryItem(container, position, any)
-        primaryItem = any as Fragment
+    override fun getItemPosition(any: Any): Int {
+        // TODO : Use a better approach and prevent refreshing existing fragment
+        return PagerAdapter.POSITION_NONE
     }
 
-    override fun getItemPosition(any: Any): Int {
-        return if (any === primaryItem) {
-            PagerAdapter.POSITION_UNCHANGED
-        } else {
-            PagerAdapter.POSITION_NONE
+    fun updateItems(newItems: List<PhotoEntity>) {
+        items.clear()
+        items.addAll(newItems)
+        pages = items.map { photoEntity ->
+            PhotoPreviewFragment.instantiate(photoEntity)
         }
     }
 

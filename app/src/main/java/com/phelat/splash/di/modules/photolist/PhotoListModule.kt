@@ -9,6 +9,7 @@ import com.phelat.splash.data.repository.photolist.PhotoListRepository
 import com.phelat.splash.data.repository.photolist.PhotoListRepositoryImpl
 import com.phelat.splash.data.request.GetPhotoRequest
 import com.phelat.splash.data.response.PhotosResponse
+import com.phelat.splash.di.modules.providers.ProvidersModule
 import com.phelat.splash.di.scopes.ForActivity
 import com.phelat.splash.presentation.executors.qualifiers.BackgroundThreadQ
 import com.phelat.splash.presentation.executors.qualifiers.MainThreadQ
@@ -25,7 +26,7 @@ import io.reactivex.disposables.CompositeDisposable
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-@Module
+@Module(includes = [ProvidersModule::class])
 class PhotoListModule {
 
     @Provides
