@@ -1,4 +1,4 @@
-package com.phelat.splash.remote.inceptors
+package com.phelat.splash.remote.interceptors
 
 import com.phelat.splash.remote.BuildConfig
 import okhttp3.Interceptor
