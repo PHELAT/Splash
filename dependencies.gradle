@@ -21,7 +21,8 @@ ext {
             dagger                 : "2.16",
             jsr                    : "1",
             architectureComponents : "1.1.1",
-            picasso                : "2.5.2"
+            picasso                : "2.5.2",
+            picassoDownloader      : "1.1.0"
     ]
 
     testLibraryVersions = [

@@ -56,6 +56,7 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
 
     implementation "com.squareup.picasso:picasso:$libraryVersions.picasso"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$libraryVersions.picassoDownloader"
 
     implementation "com.google.dagger:dagger:$libraryVersions.dagger"
     kapt "com.google.dagger:dagger-compiler:$libraryVersions.dagger"
