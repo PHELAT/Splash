@@ -13,7 +13,7 @@
         android:visibility="invisible"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
-        app:cardPreventCornerOverlap="true"
+        app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
