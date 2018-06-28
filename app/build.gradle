@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
-apply from: '../codecoverage/splashJacoco.gradle'
 
 android {
     compileSdkVersion buildVersions.compileSdkVersion

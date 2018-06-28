@@ -35,7 +35,7 @@ class PhotoListViewModelTest {
     @Test
     fun shouldUpdateLiveData() {
 
-        val observer = (mock(Observer::class.java) as Observer<List<PhotoEntity>>)
+        val observer = (mock(Observer::class.java) as Observer<MutableList<PhotoEntity>>)
         viewModel.photosObservable.observeForever(observer)
 
         val listOfPhotos = ArrayList<PhotoEntity>()

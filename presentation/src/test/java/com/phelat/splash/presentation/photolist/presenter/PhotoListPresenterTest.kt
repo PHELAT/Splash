@@ -11,8 +11,12 @@ import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
+import org.mockito.MockitoAnnotations
+import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
@@ -50,7 +54,7 @@ class PhotoListPresenterTest {
     @Test
     fun shouldFetchListOfPhotos() {
 
-        `when`(repository.getListOfPhotos())
+        `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
 
         `when`(viewModel.photosObservable)
@@ -58,13 +62,13 @@ class PhotoListPresenterTest {
 
         presenter.setUp(viewModel)
 
-        verify(repository, times(1)).getListOfPhotos()
+        verify(repository, times(1)).getListOfPhotos(Mockito.any())
     }
 
     @Test
     fun shouldAddRequestToCompositeDisposable() {
 
-        `when`(repository.getListOfPhotos())
+        `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
 
         `when`(viewModel.photosObservable)
@@ -78,7 +82,7 @@ class PhotoListPresenterTest {
     @Test
     fun shouldUseSchedulersInTheChain() {
 
-        `when`(repository.getListOfPhotos())
+        `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
 
         `when`(viewModel.photosObservable)
@@ -93,7 +97,7 @@ class PhotoListPresenterTest {
     fun shouldPassTheSuccessValueToViewModel() {
 
         val listOfPhotos = ArrayList<PhotoEntity>()
-        `when`(repository.getListOfPhotos())
+        `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(listOfPhotos))
 
         `when`(viewModel.photosObservable)
