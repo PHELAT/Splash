@@ -5,7 +5,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.phelat.splash.remote.BuildConfig
 import com.phelat.splash.remote.di.scopes.ForNetwork
-import com.phelat.splash.remote.inceptors.AuthorizationInterceptor
+import com.phelat.splash.remote.factory.TLSSocketFactory
+import com.phelat.splash.remote.interceptors.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -13,7 +14,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.security.KeyStore
 import java.util.concurrent.TimeUnit
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
 
 /**
  * Created by MAHDi on 5/31/18.
@@ -34,10 +41,27 @@ class NetworkModule(private val baseUrl: String,
 
     @Provides
     @ForNetwork
+    fun providesTrustManager(): X509TrustManager {
+        val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+        trustManagerFactory.init(null as KeyStore?)
+        val trustManagers = trustManagerFactory.trustManagers
+        return trustManagers[0] as X509TrustManager
+    }
+
+    @Provides
+    @ForNetwork
     fun provideGson(): Gson {
         return GsonBuilder()
                 .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create()
+    }
+
+    @Provides
+    @ForNetwork
+    fun providesSSLSocketFactory(trustManager: X509TrustManager): SSLSocketFactory {
+        val sslContext = SSLContext.getInstance("TLS")
+        sslContext.init(null, arrayOf<TrustManager>(trustManager), null)
+        return TLSSocketFactory(sslContext)
     }
 
     @Provides
@@ -60,13 +84,16 @@ class NetworkModule(private val baseUrl: String,
     @Provides
     @ForNetwork
     fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
-                            authorizationInterceptor: AuthorizationInterceptor): OkHttpClient {
+                            authorizationInterceptor: AuthorizationInterceptor,
+                            sslSocketFactory: SSLSocketFactory,
+                            trustManager: X509TrustManager): OkHttpClient {
         return OkHttpClient.Builder()
                 .readTimeout(readTimeout, TimeUnit.SECONDS)
                 .writeTimeout(writeTimeout, TimeUnit.SECONDS)
                 .connectTimeout(connectTimeout, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(authorizationInterceptor)
+                .sslSocketFactory(sslSocketFactory, trustManager)
                 .build()
     }
 

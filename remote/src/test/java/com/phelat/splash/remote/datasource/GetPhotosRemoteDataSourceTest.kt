@@ -44,9 +44,9 @@ class GetPhotosRemoteDataSourceTest {
 
         doReturn(Single.just(listOfPhotos))
                 .`when`(photosAPI)
-                .getPhotos(1, 10, OrderBy.OLDEST)
+                .getPhotos(2, 24, OrderBy.OLDEST)
 
-        val input = GetPhotoRequest(1, 10, OrderBy.OLDEST)
+        val input = GetPhotoRequest(2, 24, OrderBy.OLDEST)
 
         dataSource.read(input)
                 .test()
@@ -64,14 +64,14 @@ class GetPhotosRemoteDataSourceTest {
 
         doReturn(Single.just(listOfPhotos))
                 .`when`(photosAPI)
-                .getPhotos(0, 24, OrderBy.LATEST)
+                .getPhotos(1, 24, OrderBy.LATEST)
 
         dataSource.read()
                 .test()
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, times(1)).getPhotos(0, 24, OrderBy.LATEST)
+        verify(photosAPI, times(1)).getPhotos(1, 24, OrderBy.LATEST)
     }
 
 }

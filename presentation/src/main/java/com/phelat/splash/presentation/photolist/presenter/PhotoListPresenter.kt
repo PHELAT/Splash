@@ -2,6 +2,7 @@ package com.phelat.splash.presentation.photolist.presenter
 
 import com.phelat.splash.data.executors.base.SplashThread
 import com.phelat.splash.data.repository.photolist.PhotoListRepository
+import com.phelat.splash.data.request.GetPhotoRequest
 import com.phelat.splash.presentation.BuildConfig
 import com.phelat.splash.presentation.executors.qualifiers.BackgroundThreadQ
 import com.phelat.splash.presentation.executors.qualifiers.MainThreadQ
@@ -11,6 +12,7 @@ import com.phelat.splash.presentation.utils.composite
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 /**
  * Created by MAHDi on 6/5/18.
@@ -30,6 +32,13 @@ class PhotoListPresenter @Inject constructor(
 
     lateinit var viewModel: PhotoListViewModel
 
+    private val newListRequestGap = 0.8
+
+    // TODO : USE STATE
+    private var isLoading = false
+
+    private var getPhotoRequest = GetPhotoRequest(1)
+
     override fun subscribe(view: PhotoListContract.View) {
         this.view = view
     }
@@ -41,10 +50,25 @@ class PhotoListPresenter @Inject constructor(
         }
     }
 
+    override fun onPageSelected(position: Int) {
+        viewModel.photosObservable.value?.let { nonNullPhotoEntities ->
+            if ((nonNullPhotoEntities.size * newListRequestGap).roundToInt() <= position && !isLoading) {
+                fetchPhotos()
+            }
+        }
+    }
+
     private fun fetchPhotos() {
-        repository.getListOfPhotos()
+
+        isLoading = true
+
+        repository.getListOfPhotos(getPhotoRequest)
                 .subscribeOn(backgroundThread.getScheduler())
                 .observeOn(mainThread.getScheduler())
+                .doOnSuccess { _ ->
+                    isLoading = false
+                    getPhotoRequest = getPhotoRequest.copy(getPhotoRequest.page + 1)
+                }
                 .subscribe(viewModel, Consumer { throwable ->
                     if (BuildConfig.DEBUG) {
                         throwable.printStackTrace()

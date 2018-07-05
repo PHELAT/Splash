@@ -56,7 +56,7 @@ comments:
   CommentOverPrivateFunction:
     active: true
   CommentOverPrivateProperty:
-    active: true
+    active: false
   EndOfSentenceFormat:
     active: false
     endOfSentenceFormat: ([.?!][ \t\n\r\f<])|([.?!]$)
@@ -80,7 +80,7 @@ complexity:
     includeStaticDeclarations: false
   ComplexMethod:
     active: true
-    threshold: 10
+    threshold: 15
   LabeledExpression:
     active: false
   LargeClass:
@@ -107,11 +107,12 @@ complexity:
     ignoreStringsRegex: '$^'
   TooManyFunctions:
     active: true
-    thresholdInFiles: 11
+    thresholdInFiles: 20
     thresholdInClasses: 11
-    thresholdInInterfaces: 11
+    thresholdInInterfaces: 8
     thresholdInObjects: 11
     thresholdInEnums: 11
+    ignorePrivate: true
 
 empty-blocks:
   active: true
@@ -271,7 +272,7 @@ potential-bugs:
   UnreachableCode:
     active: true
   UnsafeCallOnNullableType:
-    active: true
+    active: false
   UnsafeCast:
     active: false
   UselessPostfixExpression:
@@ -307,7 +308,7 @@ style:
     active: true
     ignoreNumbers: '-1,0,1,2'
     ignoreHashCodeFunction: false
-    ignorePropertyDeclaration: false
+    ignorePropertyDeclaration: true
     ignoreConstantDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
     ignoreAnnotation: false
@@ -364,7 +365,7 @@ style:
   UnusedImports:
     active: true
   UnusedPrivateMember:
-    active: true
+    active: false
     allowedNames: "(_|ignored|expected)"
   UseDataClass:
     active: true

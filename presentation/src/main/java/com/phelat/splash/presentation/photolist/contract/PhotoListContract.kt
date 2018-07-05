@@ -17,6 +17,8 @@ interface PhotoListContract {
 
         fun setUp(viewModel: PhotoListViewModel)
 
+        fun onPageSelected(position: Int)
+
     }
 
 }

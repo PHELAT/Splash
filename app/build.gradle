@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
-apply from: '../codecoverage/splashJacoco.gradle'
 
 android {
     compileSdkVersion buildVersions.compileSdkVersion
@@ -49,12 +48,14 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$libraryVersions.supportLibraries"
     implementation "com.android.support:recyclerview-v7:$libraryVersions.supportLibraries"
+    implementation "com.android.support:cardview-v7:$libraryVersions.supportLibraries"
     implementation "com.android.support.constraint:constraint-layout:$libraryVersions.constraintLayout"
 
     implementation "android.arch.lifecycle:extensions:$libraryVersions.architectureComponents"
     kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
 
     implementation "com.squareup.picasso:picasso:$libraryVersions.picasso"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$libraryVersions.picassoDownloader"
 
     implementation "com.google.dagger:dagger:$libraryVersions.dagger"
     kapt "com.google.dagger:dagger-compiler:$libraryVersions.dagger"

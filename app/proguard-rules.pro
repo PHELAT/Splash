@@ -6,7 +6,7 @@
 -dontnote kotlin.**
 
 # OkHttp 3
--dontwarn okhttp3.internal.platform.ConscryptPlatform
+-dontwarn okhttp3.internal.**
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 # Gson

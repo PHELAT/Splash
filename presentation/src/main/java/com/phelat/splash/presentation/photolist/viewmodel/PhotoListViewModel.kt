@@ -10,17 +10,23 @@ import com.phelat.splash.presentation.viewmodel.SplashViewModel
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-class PhotoListViewModel : SplashViewModel<List<PhotoEntity>>() {
+class PhotoListViewModel : SplashViewModel<MutableList<PhotoEntity>>() {
 
     private val mutablePhotosObservable by lazy(LazyThreadSafetyMode.NONE) {
-        MutableLiveData<List<PhotoEntity>>()
+        MutableLiveData<MutableList<PhotoEntity>>()
     }
-    val photosObservable: LiveData<List<PhotoEntity>> by lazy(LazyThreadSafetyMode.NONE) {
+    val photosObservable: LiveData<MutableList<PhotoEntity>> by lazy(LazyThreadSafetyMode.NONE) {
         mutablePhotosObservable
     }
 
-    override fun accept(listOfPhotos: List<PhotoEntity>?) {
-        mutablePhotosObservable.value = listOfPhotos
+    override fun accept(mutableListOfPhotos: MutableList<PhotoEntity>) {
+        if (mutablePhotosObservable.value != null) {
+            val listOfPhotos = mutablePhotosObservable.value
+            listOfPhotos?.addAll(mutableListOfPhotos)
+            mutablePhotosObservable.value = listOfPhotos
+        } else {
+            mutablePhotosObservable.value = mutableListOfPhotos
+        }
     }
 
 }

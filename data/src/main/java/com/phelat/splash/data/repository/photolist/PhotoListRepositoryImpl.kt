@@ -20,7 +20,7 @@ class PhotoListRepositoryImpl @Inject constructor(
 
 ) : PhotoListRepository {
 
-    override fun getListOfPhotos(request: GetPhotoRequest?): Single<List<PhotoEntity>> {
+    override fun getListOfPhotos(request: GetPhotoRequest?): Single<MutableList<PhotoEntity>> {
         return remoteDataSource.read(request)
                 .toObservable()
                 .flatMapIterable { it }
