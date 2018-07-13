@@ -4,6 +4,8 @@ import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.provider.EmptyPhotoEntityProvider
 import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.di.scopes.ForActivity
+import com.phelat.splash.presentation.entity.ParcelPhotoEntity
+import com.phelat.splash.presentation.provider.EmptyParcelPhotoEntityProvider
 import dagger.Module
 import dagger.Provides
 
@@ -19,6 +21,12 @@ class ProvidersModule {
     @ForActivity
     fun provideEmptyPhotoEntityProvider(): Provider<PhotoEntity> {
         return EmptyPhotoEntityProvider()
+    }
+
+    @Provides
+    @ForActivity
+    fun provideEmptyParcelPhotoEntityProvider(): Provider<ParcelPhotoEntity> {
+        return EmptyParcelPhotoEntityProvider()
     }
 
 }

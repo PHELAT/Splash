@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.phelat.splash.R
-import com.phelat.splash.data.entity.PhotoEntity
+import com.phelat.splash.presentation.entity.ParcelPhotoEntity
 import com.phelat.splash.utils.inflate
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -26,15 +26,12 @@ class PhotoPreviewFragment : Fragment() {
 
     companion object {
 
-        private const val ID = "id"
-        private const val URL = "url"
+        private const val PHOTO_ENTITY = "photoEntity"
 
-        fun instantiate(data: PhotoEntity): PhotoPreviewFragment {
+        fun instantiate(data: ParcelPhotoEntity): PhotoPreviewFragment {
 
-            // TODO : USE PARCELABLE TO PASS OBJECT
             val bundle = Bundle().apply {
-                putString(ID, data.id)
-                putString(URL, data.photoUrls?.regular)
+                putParcelable(PHOTO_ENTITY, data)
             }
 
             return PhotoPreviewFragment().apply {
@@ -45,6 +42,10 @@ class PhotoPreviewFragment : Fragment() {
     }
 
     private val loadingEvaluatorDuration = 1000L
+
+    private val photoEntity by lazy {
+        arguments!!.getParcelable<ParcelPhotoEntity>(PHOTO_ENTITY)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.photo_list_item)
@@ -64,9 +65,9 @@ class PhotoPreviewFragment : Fragment() {
         }
         colorAnim.start()
 
-        if (arguments?.getString(URL, "") != "") {
+        photoEntity.photoUrls?.let { photoUrlsData ->
             Picasso.with(activity?.applicationContext)
-                    .load(arguments?.getString(URL))
+                    .load(photoUrlsData.regular)
                     .into(splash, object : Callback {
                         override fun onSuccess() {
                             splashCard.visibility = View.VISIBLE

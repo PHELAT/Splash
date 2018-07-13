@@ -23,7 +23,7 @@ inline fun <reified T : ViewModel> Fragment.viewModelProvider(crossinline factor
     }
 }
 
-inline fun <reified T : ViewModel> viewModelFactory(crossinline factory: () -> T): ViewModelProvider.Factory? {
+inline fun <reified T : ViewModel> viewModelFactory(crossinline factory: () -> T): ViewModelProvider.Factory {
     return object : ViewModelProvider.Factory {
         override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U
     }

@@ -1,17 +1,18 @@
 package com.phelat.splash.photolist.activity
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.phelat.splash.R
 import com.phelat.splash.activity.SplashActivity
-import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.photopreview.adapter.PhotoPreviewAdapter
+import com.phelat.splash.presentation.entity.ParcelPhotoEntity
 import com.phelat.splash.presentation.photolist.contract.PhotoListContract
 import com.phelat.splash.presentation.photolist.viewmodel.PhotoListViewModel
 import com.phelat.splash.utils.splashComponent
-import com.phelat.splash.utils.viewModelProvider
 import kotlinx.android.synthetic.main.photo_list_activity.*
 import javax.inject.Inject
 
@@ -28,14 +29,15 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
     lateinit var presenter: PhotoListContract.Presenter
 
     @Inject
-    lateinit var emptyPhotoEntityProvider: Provider<PhotoEntity>
+    lateinit var emptyParcelPhotoEntityProvider: Provider<ParcelPhotoEntity>
 
-    private val photoListViewModel by viewModelProvider {
-        PhotoListViewModel()
-    }
+    @Inject
+    lateinit var photoListViewModelFactory: ViewModelProvider.Factory
+
+    lateinit var photoListViewModel: PhotoListViewModel
 
     private val photoListPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        val emptyPhotoEntity = emptyPhotoEntityProvider.provide()
+        val emptyPhotoEntity = emptyParcelPhotoEntityProvider.provide()
         PhotoPreviewAdapter(supportFragmentManager, arrayListOf(emptyPhotoEntity, emptyPhotoEntity))
     }
 
@@ -46,6 +48,9 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
                 .inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.photo_list_activity)
+
+        photoListViewModel = ViewModelProviders.of(this, photoListViewModelFactory)
+                .get(PhotoListViewModel::class.java)
 
         previewPager.offscreenPageLimit = offScreenPageLimit
         previewPager.adapter = photoListPagerAdapter

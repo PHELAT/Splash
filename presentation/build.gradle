@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 apply from: '../codecoverage/splashJacoco.gradle'
@@ -24,6 +25,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
