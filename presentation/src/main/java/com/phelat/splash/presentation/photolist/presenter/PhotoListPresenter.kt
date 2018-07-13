@@ -50,11 +50,9 @@ class PhotoListPresenter @Inject constructor(
         }
     }
 
-    override fun onPageSelected(position: Int) {
-        viewModel.photosObservable.value?.let { nonNullPhotoEntities ->
-            if ((nonNullPhotoEntities.size * newListRequestGap).roundToInt() <= position && !isLoading) {
-                fetchPhotos()
-            }
+    override fun onPageScroll() {
+        if (!isLoading && (view.getTotalItems() * newListRequestGap).roundToInt() <= view.getLastVisibleItem()) {
+            fetchPhotos()
         }
     }
 

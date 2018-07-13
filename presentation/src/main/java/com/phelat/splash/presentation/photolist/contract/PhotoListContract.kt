@@ -11,13 +11,19 @@ import com.phelat.splash.presentation.view.BaseView
 
 interface PhotoListContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+
+        fun getTotalItems(): Int
+
+        fun getLastVisibleItem(): Int
+
+    }
 
     interface Presenter : BasePresenter<View> {
 
         fun setUp(viewModel: PhotoListViewModel)
 
-        fun onPageSelected(position: Int)
+        fun onPageScroll()
 
     }
 

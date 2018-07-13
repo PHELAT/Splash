@@ -1,6 +1,5 @@
 package com.phelat.splash.di.modules.photolist
 
-import android.arch.lifecycle.ViewModelProvider
 import com.phelat.splash.data.datasource.DataSource
 import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.executors.base.SplashThread
@@ -10,18 +9,14 @@ import com.phelat.splash.data.repository.photolist.PhotoListRepository
 import com.phelat.splash.data.repository.photolist.PhotoListRepositoryImpl
 import com.phelat.splash.data.request.GetPhotoRequest
 import com.phelat.splash.data.response.PhotosResponse
-import com.phelat.splash.di.modules.mapper.MappersModule
 import com.phelat.splash.di.modules.providers.ProvidersModule
 import com.phelat.splash.di.scopes.ForActivity
-import com.phelat.splash.presentation.entity.ParcelPhotoEntity
 import com.phelat.splash.presentation.executors.qualifiers.BackgroundThreadQ
 import com.phelat.splash.presentation.executors.qualifiers.MainThreadQ
 import com.phelat.splash.presentation.photolist.contract.PhotoListContract
 import com.phelat.splash.presentation.photolist.presenter.PhotoListPresenter
-import com.phelat.splash.presentation.photolist.viewmodel.PhotoListViewModel
 import com.phelat.splash.remote.api.PhotosAPI
 import com.phelat.splash.remote.datasource.GetPhotosRemoteDataSource
-import com.phelat.splash.utils.viewModelFactory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -31,7 +26,7 @@ import io.reactivex.disposables.CompositeDisposable
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-@Module(includes = [ProvidersModule::class, MappersModule::class])
+@Module(includes = [ProvidersModule::class])
 class PhotoListModule {
 
     @Provides
@@ -62,16 +57,6 @@ class PhotoListModule {
                                   @MainThreadQ mainThread: SplashThread,
                                   @BackgroundThreadQ backgroundThread: SplashThread): PhotoListContract.Presenter {
         return PhotoListPresenter(repository, compositeDisposable, mainThread, backgroundThread)
-    }
-
-    @Provides
-    @ForActivity
-    fun providePhotoListViewModelFactory(
-            photoEntityMapper: Mapper<PhotoEntity, ParcelPhotoEntity>
-    ): ViewModelProvider.Factory {
-        return viewModelFactory {
-            PhotoListViewModel(photoEntityMapper)
-        }
     }
 
 }

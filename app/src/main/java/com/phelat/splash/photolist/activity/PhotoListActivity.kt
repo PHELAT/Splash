@@ -1,15 +1,15 @@
 package com.phelat.splash.photolist.activity
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.phelat.splash.R
 import com.phelat.splash.activity.SplashActivity
+import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.photopreview.adapter.PhotoPreviewAdapter
-import com.phelat.splash.presentation.entity.ParcelPhotoEntity
 import com.phelat.splash.presentation.photolist.contract.PhotoListContract
 import com.phelat.splash.presentation.photolist.viewmodel.PhotoListViewModel
 import com.phelat.splash.utils.splashComponent
@@ -21,27 +21,24 @@ import javax.inject.Inject
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
-        PhotoListContract.View,
-        ViewPager.OnPageChangeListener {
+class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(), PhotoListContract.View {
 
     @Inject
     lateinit var presenter: PhotoListContract.Presenter
 
     @Inject
-    lateinit var emptyParcelPhotoEntityProvider: Provider<ParcelPhotoEntity>
+    lateinit var emptyPhotoEntityProvider: Provider<PhotoEntity>
 
-    @Inject
-    lateinit var photoListViewModelFactory: ViewModelProvider.Factory
+    private lateinit var photoListViewModel: PhotoListViewModel
 
-    lateinit var photoListViewModel: PhotoListViewModel
-
-    private val photoListPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        val emptyPhotoEntity = emptyParcelPhotoEntityProvider.provide()
-        PhotoPreviewAdapter(supportFragmentManager, arrayListOf(emptyPhotoEntity, emptyPhotoEntity))
+    private val photoListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        val emptyPhotoEntity = emptyPhotoEntityProvider.provide()
+        PhotoPreviewAdapter(mutableListOf(emptyPhotoEntity, emptyPhotoEntity))
     }
 
-    private val offScreenPageLimit = 4
+    private val layoutManager by lazy(LazyThreadSafetyMode.NONE) {
+        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         splashComponent.photoListActivityInjector()
@@ -49,19 +46,22 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.photo_list_activity)
 
-        photoListViewModel = ViewModelProviders.of(this, photoListViewModelFactory)
-                .get(PhotoListViewModel::class.java)
+        photoListViewModel = ViewModelProviders.of(this).get(PhotoListViewModel::class.java)
 
-        previewPager.offscreenPageLimit = offScreenPageLimit
-        previewPager.adapter = photoListPagerAdapter
-        previewPager.addOnPageChangeListener(this)
+        previewRecycler.layoutManager = layoutManager
+        previewRecycler.adapter = photoListAdapter
+        previewRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                presenter.onPageScroll()
+            }
+        })
 
         presenter.subscribe(this)
 
         photoListViewModel.photosObservable.observe(this, Observer { photoEntities ->
             photoEntities?.let { nonNullPhotoEntities ->
-                photoListPagerAdapter.updateItems(nonNullPhotoEntities)
-                photoListPagerAdapter.notifyDataSetChanged()
+                photoListAdapter.updateItems(nonNullPhotoEntities)
             }
         })
 
@@ -69,12 +69,12 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(),
 
     }
 
-    override fun onPageScrollStateChanged(state: Int) {}
+    override fun getTotalItems(): Int {
+        return layoutManager.itemCount
+    }
 
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-    override fun onPageSelected(position: Int) {
-        presenter.onPageSelected(position)
+    override fun getLastVisibleItem(): Int {
+        return layoutManager.findLastVisibleItemPosition()
     }
 
     override fun onDestroy() {
