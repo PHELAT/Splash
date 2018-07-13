@@ -5,7 +5,22 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['test']) {
         sourceSets it.sourceSets.main
     }
 
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            'android/**/*.*',
+            '**/di/**',
+            '**/const/**',
+            '**/*_Factory.*',
+            '**/utils/**',
+            '**/com/phelat/splash/data/request/**',
+            '**/com/phelat/splash/data/response/**',
+            '**/com/phelat/splash/data/model/**',
+            '**/com/phelat/splash/data/entity/**'
+    ]
     def javaClasses = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
     def kotlinClasses = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
     def kotlinClassesTwo = fileTree(dir: "$project.buildDir/classes/kotlin/", excludes: fileFilter)
