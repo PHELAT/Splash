@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/previewPager"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/previewRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

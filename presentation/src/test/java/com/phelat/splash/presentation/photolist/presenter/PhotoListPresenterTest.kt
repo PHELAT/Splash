@@ -133,24 +133,22 @@ class PhotoListPresenterTest {
     @Test
     fun shouldRequestForNewPageWhenNearToEndOfList() {
 
-        val value = mock(ArrayList::class.java)
-        val liveData = mock(MutableLiveData::class.java)
-
-        doReturn(value)
-                .`when`(liveData)
-                .value
-
-        doReturn(10)
-                .`when`(value)
-                .size
-
-        `when`(viewModel.photosObservable)
-                .thenReturn(liveData as MutableLiveData<MutableList<PhotoEntity>>)
-
         `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
 
-        presenter.onPageSelected(8)
+        val view = mock(PhotoListContract.View::class.java)
+
+        doReturn(24)
+                .`when`(view)
+                .getTotalItems()
+
+        doReturn(23)
+                .`when`(view)
+                .getLastVisibleItem()
+
+        presenter.subscribe(view)
+
+        presenter.onPageScroll()
 
         verify(repository, times(1)).getListOfPhotos(Mockito.any())
     }
@@ -158,23 +156,42 @@ class PhotoListPresenterTest {
     @Test
     fun shouldNotRequestForNewPageWhenNotNearToEndOfList() {
 
-        val value = mock(ArrayList::class.java)
-        val liveData = mock(MutableLiveData::class.java)
+        val view = mock(PhotoListContract.View::class.java)
 
-        doReturn(value)
-                .`when`(liveData)
-                .value
+        doReturn(24)
+                .`when`(view)
+                .getTotalItems()
 
-        doReturn(10)
-                .`when`(value)
-                .size
+        doReturn(18)
+                .`when`(view)
+                .getLastVisibleItem()
 
-        `when`(viewModel.photosObservable)
-                .thenReturn(liveData as MutableLiveData<MutableList<PhotoEntity>>)
+        presenter.subscribe(view)
 
-        presenter.onPageSelected(7)
+        presenter.onPageScroll()
 
         verify(repository, never()).getListOfPhotos(Mockito.any())
+    }
+
+    @Test
+    fun shouldCalculateDistanceToNewPageRequestGapWhenScrolling() {
+
+        val view = mock(PhotoListContract.View::class.java)
+
+        doReturn(24)
+                .`when`(view)
+                .getTotalItems()
+
+        doReturn(18)
+                .`when`(view)
+                .getLastVisibleItem()
+
+        presenter.subscribe(view)
+
+        presenter.onPageScroll()
+
+        verify(view, times(1)).getLastVisibleItem()
+        verify(view, times(1)).getTotalItems()
     }
 
 }

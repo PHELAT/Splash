@@ -5,6 +5,7 @@ import com.phelat.splash.data.datasource.DataSource
 import com.phelat.splash.data.request.GetPhotoRequest
 import com.phelat.splash.data.response.PhotosResponse
 import com.phelat.splash.remote.api.PhotosAPI
+import com.phelat.splash.remote.const.RemoteConstant
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -64,14 +65,14 @@ class GetPhotosRemoteDataSourceTest {
 
         doReturn(Single.just(listOfPhotos))
                 .`when`(photosAPI)
-                .getPhotos(1, 24, OrderBy.LATEST)
+                .getPhotos(1, RemoteConstant.PER_PAGE, OrderBy.LATEST)
 
         dataSource.read()
                 .test()
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, times(1)).getPhotos(1, 24, OrderBy.LATEST)
+        verify(photosAPI, times(1)).getPhotos(1)
     }
 
 }

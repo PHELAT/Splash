@@ -1,4 +1,4 @@
-package com.phelat.splash.remote.util
+package com.phelat.splash.data.util
 
 import java.io.BufferedReader
 import java.io.File

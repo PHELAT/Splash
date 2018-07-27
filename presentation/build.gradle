@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 apply from: '../codecoverage/splashJacoco.gradle'
@@ -26,6 +27,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -39,6 +44,8 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$libraryVersions.architectureComponents"
 
     implementation "javax.inject:javax.inject:$libraryVersions.jsr"
+
+    implementation "com.google.code.gson:gson:$libraryVersions.gson"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
     testImplementation "org.mockito:mockito-core:$testLibraryVersions.mockito"

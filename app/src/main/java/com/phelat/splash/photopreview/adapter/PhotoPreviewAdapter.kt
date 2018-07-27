@@ -1,47 +1,46 @@
 package com.phelat.splash.photopreview.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.PagerAdapter
+import android.support.v7.util.DiffUtil
+import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
+import com.phelat.splash.R
 import com.phelat.splash.data.entity.PhotoEntity
-import com.phelat.splash.photopreview.fragment.PhotoPreviewFragment
+import com.phelat.splash.photopreview.holder.PhotoPreviewHolder
+import com.phelat.splash.photopreview.utils.PhotoListDiffUtil
+import com.phelat.splash.utils.inflate
 
 /**
  * Created by MAHDi on 6/21/18.
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-class PhotoPreviewAdapter(fragmentManager: FragmentManager,
-                          private val items: MutableList<PhotoEntity>) : FragmentStatePagerAdapter(fragmentManager) {
+class PhotoPreviewAdapter(
 
-    private var pages = items.map { photoEntity ->
-        PhotoPreviewFragment.instantiate(photoEntity)
+        private val items: MutableList<PhotoEntity>
+
+) : RecyclerView.Adapter<PhotoPreviewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoPreviewHolder {
+        return PhotoPreviewHolder(parent.inflate(R.layout.photo_list_item))
     }
 
-    override fun getItem(position: Int): Fragment {
-        return pages[position]
+    override fun onBindViewHolder(holder: PhotoPreviewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-    override fun getCount(): Int {
-        return pages.size
+    override fun getItemCount(): Int {
+        return items.size
     }
 
-    override fun getPageWidth(position: Int): Float {
-        return 0.8F
-    }
+    fun updateItems(newItems: MutableList<PhotoEntity>) {
 
-    override fun getItemPosition(any: Any): Int {
-        // TODO : Use a better approach and prevent refreshing existing fragment
-        return PagerAdapter.POSITION_NONE
-    }
+        val diffUtil = PhotoListDiffUtil(newItems, items)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
 
-    fun updateItems(newItems: List<PhotoEntity>) {
         items.clear()
         items.addAll(newItems)
-        pages = items.map { photoEntity ->
-            PhotoPreviewFragment.instantiate(photoEntity)
-        }
+
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 
 }
