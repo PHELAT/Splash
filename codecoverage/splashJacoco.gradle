@@ -19,7 +19,9 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['test']) {
             '**/com/phelat/splash/data/request/**',
             '**/com/phelat/splash/data/response/**',
             '**/com/phelat/splash/data/model/**',
-            '**/com/phelat/splash/data/entity/**'
+            '**/com/phelat/splash/data/entity/**',
+            '**/com/phelat/splash/presentation/entity/**',
+            '**/com/phelat/splash/presentation/model/**'
     ]
     def javaClasses = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
     def kotlinClasses = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
