@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PagerSnapHelper
 import android.support.v7.widget.RecyclerView
 import com.phelat.splash.R
 import com.phelat.splash.activity.SplashActivity
@@ -56,6 +57,8 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(), PhotoLi
                 presenter.onPageScroll()
             }
         })
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(previewRecycler)
 
         presenter.subscribe(this)
 
