@@ -1,5 +1,6 @@
 package com.phelat.splash.presentation.model
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -8,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
  * Contact me m4hdi.pdroid at gmail.com
  */
 
+@SuppressLint("ParcelCreator")
 @Parcelize
 data class ParcelProfileImageData(
 

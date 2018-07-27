@@ -11,7 +11,7 @@ interface Provider<Provides> {
 
     interface WithInput<Input, Provides> {
 
-        fun provide(input: Input)
+        fun provide(input: Input): Provides
 
     }
 
