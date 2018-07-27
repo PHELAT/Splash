@@ -21,20 +21,24 @@ import kotlinx.android.synthetic.main.photo_list_shimmer.view.*
 
 class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+    companion object {
+
+        const val LOADING_EVALUATOR_DURATION = 1000L
+
+    }
+
     val splash: AppCompatImageView = view.splash
 
     val splashShimmer: CardView = view.splashShimmer
 
     val splashCard: CardView = view.splashCard
 
-    private val loadingEvaluatorDuration = 1000L
-
     private val colorAnim by lazy(LazyThreadSafetyMode.NONE) {
         ObjectAnimator.ofInt(splashShimmer,
                 "cardBackgroundColor",
                 Color.parseColor("#F5F5F5"),
                 Color.parseColor("#E0E0E0")).apply {
-            duration = loadingEvaluatorDuration
+            duration = LOADING_EVALUATOR_DURATION
             setEvaluator(ArgbEvaluator())
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
@@ -42,6 +46,9 @@ class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bind(photoEntity: PhotoEntity) {
+
+        splashCard.visibility = View.GONE
+        splashShimmer.visibility = View.VISIBLE
 
         colorAnim.start()
 
@@ -61,12 +68,6 @@ class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
                         }
                     })
         }
-    }
-
-    fun onDestroy() {
-        colorAnim.cancel()
-        Picasso.with(splash.context.applicationContext)
-                .cancelRequest(splash)
     }
 
 }

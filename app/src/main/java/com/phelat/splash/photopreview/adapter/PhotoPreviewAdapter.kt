@@ -32,11 +32,6 @@ class PhotoPreviewAdapter(
         return items.size
     }
 
-    override fun onViewDetachedFromWindow(holder: PhotoPreviewHolder) {
-        holder.onDestroy()
-        super.onViewDetachedFromWindow(holder)
-    }
-
     fun updateItems(newItems: MutableList<PhotoEntity>) {
 
         val diffUtil = PhotoListDiffUtil(newItems, items)
