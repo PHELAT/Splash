@@ -17,6 +17,7 @@ interface PhotosAPI {
     @GET("/photos")
     fun getPhotos(@Query("page") page: Int,
                   @Query("per_page") perPage: Int = RemoteConstant.PER_PAGE,
-                  @Query("order_by") orderBy: String = OrderBy.LATEST): Single<List<PhotosResponse>>
+                  @Query("order_by") orderBy: String = OrderBy.LATEST,
+                  @Query("sig") sig: Long = System.currentTimeMillis()): Single<List<PhotosResponse>>
 
 }
