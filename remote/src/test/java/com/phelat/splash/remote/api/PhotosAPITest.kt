@@ -2,7 +2,7 @@ package com.phelat.splash.remote.api
 
 import com.phelat.splash.remote.di.DaggerNetworkComponent
 import com.phelat.splash.remote.di.NetworkModule
-import com.phelat.splash.remote.util.TestUtils
+import com.phelat.splash.remote.utils.TestUtils
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
