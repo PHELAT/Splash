@@ -66,4 +66,30 @@ class PhotoEntityToParcelPhotoEntityMapperTest {
 
     }
 
+    @Test
+    fun testIfParcelPhotoEntityMapsToPhotoEntity() {
+
+        val photosResponse = Gson().fromJson(TestUtils.readResource("json/photos/photos_response.json",
+                this.javaClass.classLoader),
+                PhotosResponse::class.java)
+
+        val photoEntity = photoResponseToPhotoEntity.mapFromTo(photosResponse)
+
+        val parcelPhotoEntity = mapper.mapFromTo(photoEntity)
+
+        val photoEntityAfterMap = mapper.mapToFrom(parcelPhotoEntity)
+
+        MatcherAssert.assertThat(photoEntity.id, IsEqual(photoEntityAfterMap.id))
+        MatcherAssert.assertThat(photoEntity.createdAt, IsEqual(photoEntityAfterMap.createdAt))
+        MatcherAssert.assertThat(photoEntity.updatedAt, IsEqual(photoEntityAfterMap.updatedAt))
+        MatcherAssert.assertThat(photoEntity.width, IsEqual(photoEntityAfterMap.width))
+        MatcherAssert.assertThat(photoEntity.height, IsEqual(photoEntityAfterMap.height))
+        MatcherAssert.assertThat(photoEntity.color, IsEqual(photoEntityAfterMap.color))
+        MatcherAssert.assertThat(photoEntity.likes, IsEqual(photoEntityAfterMap.likes))
+        MatcherAssert.assertThat(photoEntity.description, IsEqual(photoEntityAfterMap.description))
+        MatcherAssert.assertThat(photoEntity.userId, IsEqual(photoEntityAfterMap.userId))
+        MatcherAssert.assertThat(photoEntity.usersName, IsEqual(photoEntityAfterMap.usersName))
+
+    }
+
 }
