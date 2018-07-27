@@ -57,4 +57,23 @@ class ProfileImageDataToParcelProfileImageDataTest {
 
     }
 
+    @Test
+    fun testIfParcelProfileImageDataMapsToProfileImageData() {
+
+        val photosResponse = gson.fromJson(TestUtils.readResource("json/photos/photos_response.json",
+                this.javaClass.classLoader),
+                PhotosResponse::class.java)
+
+        val photoEntity = photoResponseToPhotoEntity.mapFromTo(photosResponse)
+
+        val parcelUserProfileImageData = mapper.mapFromTo(photoEntity.userProfileImage)
+
+        val userProfileImageData = mapper.mapToFrom(parcelUserProfileImageData)
+
+        MatcherAssert.assertThat(userProfileImageData!!.large, IsEqual(parcelUserProfileImageData!!.large))
+        MatcherAssert.assertThat(userProfileImageData.medium, IsEqual(parcelUserProfileImageData.medium))
+        MatcherAssert.assertThat(userProfileImageData.small, IsEqual(parcelUserProfileImageData.small))
+
+    }
+
 }
