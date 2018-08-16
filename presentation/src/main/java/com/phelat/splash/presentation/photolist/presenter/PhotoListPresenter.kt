@@ -14,11 +14,6 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-/**
- * Created by MAHDi on 6/5/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoListPresenter @Inject constructor(
 
         private val repository: PhotoListRepository,

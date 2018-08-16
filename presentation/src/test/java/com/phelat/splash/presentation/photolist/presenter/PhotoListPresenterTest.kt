@@ -22,11 +22,6 @@ import org.mockito.MockitoAnnotations
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by MAHDi on 6/5/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @RunWith(MockitoJUnitRunner::class)
 class PhotoListPresenterTest {
 
@@ -56,7 +51,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun testIfPresenterSetsViewWhenSubscribed() {
+    fun `should set view when subscribed`() {
 
         val view = mock(PhotoListContract.View::class.java)
 
@@ -66,7 +61,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldFetchListOfPhotos() {
+    fun `should fetch list of photos when setUp`() {
 
         `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
@@ -80,7 +75,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldAddRequestToCompositeDisposable() {
+    fun `should add fetch photos request to compositeDisposable`() {
 
         `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
@@ -94,7 +89,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldUseSchedulersInTheChain() {
+    fun `should use schedulers in the chain`() {
 
         `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
@@ -108,7 +103,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldPassTheSuccessValueToViewModel() {
+    fun `should pass the success value to viewModel`() {
 
         val listOfPhotos = ArrayList<PhotoEntity>()
         `when`(repository.getListOfPhotos(Mockito.any()))
@@ -123,7 +118,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldClearCompositeDisposableWhenUnsubscribe() {
+    fun `should clear compositeDisposable when unsubscribe`() {
 
         presenter.unsubscribe()
 
@@ -131,7 +126,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldRequestForNewPageWhenNearToEndOfList() {
+    fun `should request for new page when near to end of the recyclerView`() {
 
         `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
@@ -154,7 +149,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldNotRequestForNewPageWhenNotNearToEndOfList() {
+    fun `should not request for new page when not near to end of the recyclerView`() {
 
         val view = mock(PhotoListContract.View::class.java)
 
@@ -174,7 +169,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun shouldCalculateDistanceToNewPageRequestGapWhenScrolling() {
+    fun `should calculate distance to new page request gap when scrolling`() {
 
         val view = mock(PhotoListContract.View::class.java)
 
