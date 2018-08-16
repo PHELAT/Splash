@@ -5,13 +5,13 @@ package com.phelat.splash.data.provider.base
  * Contact me m4hdi.pdroid at gmail.com
  */
 
-interface Provider<Provides> {
+interface Provider<Output> {
 
-    fun provide(): Provides
+    fun provide(): Output
 
-    interface WithInput<Input, Provides> {
+    interface WithInput<Input, Output> {
 
-        fun provide(input: Input): Provides
+        fun provide(input: Input): Output
 
     }
 
