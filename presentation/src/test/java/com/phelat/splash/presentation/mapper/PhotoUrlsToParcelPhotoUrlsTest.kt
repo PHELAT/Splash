@@ -34,7 +34,7 @@ class PhotoUrlsToParcelPhotoUrlsTest {
     }
 
     @Test
-    fun testIfPhotoUrlsDataMapsToParcelPhotoUrls() {
+    fun `test if PhotoUrlsData maps to ParcelPhotoUrls`() {
 
         val photosResponse = Gson().fromJson(TestUtils.readResource("json/photos/photos_response.json",
                 this.javaClass.classLoader),
