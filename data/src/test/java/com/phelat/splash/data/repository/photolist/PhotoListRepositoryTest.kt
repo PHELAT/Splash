@@ -9,8 +9,12 @@ import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
+import org.mockito.MockitoAnnotations
+import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
@@ -49,7 +53,7 @@ class PhotoListRepositoryTest {
     }
 
     @Test
-    fun shouldFetchPhotosFromRemoteDataSource() {
+    fun `should fetch photos from remoteDataSource`() {
 
         repository.getListOfPhotos()
                 .test()
@@ -60,7 +64,7 @@ class PhotoListRepositoryTest {
     }
 
     @Test
-    fun shouldMapPhotosResponseToPhotoEntity() {
+    fun `should map photos response to PhotoEntity`() {
 
         repository.getListOfPhotos()
                 .test()
