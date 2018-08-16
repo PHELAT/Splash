@@ -26,7 +26,7 @@ class EmptyPhotoEntityProviderTest {
     }
 
     @Test
-    fun testIfProviderReturnsPhotoEntity() {
+    fun `test if provider returns PhotoEntity`() {
 
         val providedData = provider.provide()
 
@@ -34,7 +34,7 @@ class EmptyPhotoEntityProviderTest {
     }
 
     @Test
-    fun testIfProviderReturnsEmptyPhotoEntity() {
+    fun `test if provider returns empty PhotoEntity`() {
 
         val providedData = provider.provide()
 
