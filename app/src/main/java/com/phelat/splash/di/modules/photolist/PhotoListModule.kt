@@ -38,26 +38,30 @@ class PhotoListModule {
 
     @Provides
     @ForActivity
-    fun provideGetPhotoListRemoteDataSource(photosAPI: PhotosAPI,
-                                            sigProvider: Provider<Long>)
-            : DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>> {
+    fun provideGetPhotoListRemoteDataSource(
+            photosAPI: PhotosAPI,
+            sigProvider: Provider<Long>
+    ): DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>> {
         return GetPhotosRemoteDataSource(photosAPI, sigProvider)
     }
 
     @Provides
     @ForActivity
-    fun providePhotoListRepository(remoteDataSource: DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>>,
-                                   photoResponseToPhotoEntity: Mapper<PhotosResponse, PhotoEntity>)
-            : PhotoListRepository {
+    fun providePhotoListRepository(
+            remoteDataSource: DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>>,
+            photoResponseToPhotoEntity: Mapper<PhotosResponse, PhotoEntity>
+    ): PhotoListRepository {
         return PhotoListRepositoryImpl(remoteDataSource, photoResponseToPhotoEntity)
     }
 
     @Provides
     @ForActivity
-    fun providePhotoListPresenter(repository: PhotoListRepository,
-                                  compositeDisposable: CompositeDisposable,
-                                  @MainThreadQ mainThread: SplashThread,
-                                  @BackgroundThreadQ backgroundThread: SplashThread): PhotoListContract.Presenter {
+    fun providePhotoListPresenter(
+            repository: PhotoListRepository,
+            compositeDisposable: CompositeDisposable,
+            @MainThreadQ mainThread: SplashThread,
+            @BackgroundThreadQ backgroundThread: SplashThread
+    ): PhotoListContract.Presenter {
         return PhotoListPresenter(repository, compositeDisposable, mainThread, backgroundThread)
     }
 
