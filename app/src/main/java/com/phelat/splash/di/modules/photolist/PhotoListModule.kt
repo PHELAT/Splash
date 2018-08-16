@@ -5,6 +5,7 @@ import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.executors.base.SplashThread
 import com.phelat.splash.data.mapper.Mapper
 import com.phelat.splash.data.mapper.PhotoResponseToPhotoEntity
+import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.data.repository.photolist.PhotoListRepository
 import com.phelat.splash.data.repository.photolist.PhotoListRepositoryImpl
 import com.phelat.splash.data.request.GetPhotoRequest
@@ -37,9 +38,10 @@ class PhotoListModule {
 
     @Provides
     @ForActivity
-    fun provideGetPhotoListRemoteDataSource(photosAPI: PhotosAPI)
+    fun provideGetPhotoListRemoteDataSource(photosAPI: PhotosAPI,
+                                            sigProvider: Provider<Long>)
             : DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>> {
-        return GetPhotosRemoteDataSource(photosAPI)
+        return GetPhotosRemoteDataSource(photosAPI, sigProvider)
     }
 
     @Provides

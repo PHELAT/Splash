@@ -2,6 +2,7 @@ package com.phelat.splash.remote.datasource
 
 import com.phelat.splash.data.const.OrderBy
 import com.phelat.splash.data.datasource.DataSource
+import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.data.request.GetPhotoRequest
 import com.phelat.splash.data.response.PhotosResponse
 import com.phelat.splash.remote.api.PhotosAPI
@@ -27,6 +28,9 @@ class GetPhotosRemoteDataSourceTest {
     @Mock
     lateinit var photosAPI: PhotosAPI
 
+    @Mock
+    lateinit var sigProvider: Provider<Long>
+
     lateinit var dataSource: DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>>
 
     @Before
@@ -34,7 +38,11 @@ class GetPhotosRemoteDataSourceTest {
 
         MockitoAnnotations.initMocks(this)
 
-        dataSource = GetPhotosRemoteDataSource(photosAPI)
+        doReturn(123)
+                .`when`(sigProvider)
+                .provide()
+
+        dataSource = GetPhotosRemoteDataSource(photosAPI, sigProvider)
     }
 
     @Test
@@ -45,7 +53,7 @@ class GetPhotosRemoteDataSourceTest {
 
         doReturn(Single.just(listOfPhotos))
                 .`when`(photosAPI)
-                .getPhotos(2, 24, OrderBy.OLDEST)
+                .getPhotos(2, 24, OrderBy.OLDEST, 123)
 
         val input = GetPhotoRequest(2, 24, OrderBy.OLDEST)
 
@@ -54,7 +62,7 @@ class GetPhotosRemoteDataSourceTest {
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, times(1)).getPhotos(input.page, input.perPage, input.orderBy)
+        verify(photosAPI, times(1)).getPhotos(input.page, input.perPage, input.orderBy, 123)
     }
 
     @Test
@@ -65,14 +73,14 @@ class GetPhotosRemoteDataSourceTest {
 
         doReturn(Single.just(listOfPhotos))
                 .`when`(photosAPI)
-                .getPhotos(1, RemoteConstant.PER_PAGE, OrderBy.LATEST)
+                .getPhotos(1, RemoteConstant.PER_PAGE, OrderBy.LATEST, 123)
 
         dataSource.read()
                 .test()
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, times(1)).getPhotos(1)
+        verify(photosAPI, times(1)).getPhotos(1, sig = 123)
     }
 
 }

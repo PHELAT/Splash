@@ -44,7 +44,7 @@ class PhotosAPITest {
         response.setBody(TestUtils.readResource("json/photos/photos_response.json", this.javaClass.classLoader))
         mockWebServer.enqueue(response)
 
-        api.getPhotos(0, 10)
+        api.getPhotos(0, 10, sig = 123)
                 .test()
                 .assertNoErrors()
                 .assertValue {
