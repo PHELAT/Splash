@@ -37,7 +37,7 @@ class PhotosAPITest {
     }
 
     @Test
-    fun shouldReturnLatestPhotos() {
+    fun `test if it maps the server result to appropriate data classes`() {
 
         val response = MockResponse()
         response.setResponseCode(200)
