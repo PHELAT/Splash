@@ -38,7 +38,7 @@ class GetPhotosRemoteDataSourceTest {
     }
 
     @Test
-    fun shouldReturnListOfPhotosWithSpecificInput() {
+    fun `should return list of photos with a specific getPhotoRequest`() {
 
         val mockPhotosResponse = Mockito.mock(PhotosResponse::class.java)
         val listOfPhotos = arrayListOf(mockPhotosResponse)
@@ -58,7 +58,7 @@ class GetPhotosRemoteDataSourceTest {
     }
 
     @Test
-    fun shouldReturnListOfPhotosWithoutSpecificInput() {
+    fun `should return list of photos without specific input`() {
 
         val mockPhotosResponse = Mockito.mock(PhotosResponse::class.java)
         val listOfPhotos = arrayListOf(mockPhotosResponse)
