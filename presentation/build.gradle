@@ -48,7 +48,8 @@ dependencies {
     implementation "com.google.code.gson:gson:$libraryVersions.gson"
 
     testImplementation "junit:junit:$testLibraryVersions.junit"
-    testImplementation "org.mockito:mockito-core:$testLibraryVersions.mockito"
+    testImplementation "org.powermock:powermock-module-junit4:$testLibraryVersions.powerMock"
+    testImplementation "org.powermock:powermock-api-mockito2:$testLibraryVersions.powerMock"
     testImplementation "android.arch.core:core-testing:$libraryVersions.architectureComponents"
 
 }
