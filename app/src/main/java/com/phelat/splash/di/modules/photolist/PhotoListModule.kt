@@ -5,6 +5,7 @@ import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.executors.base.SplashThread
 import com.phelat.splash.data.mapper.Mapper
 import com.phelat.splash.data.mapper.PhotoResponseToPhotoEntity
+import com.phelat.splash.data.provider.base.Provider
 import com.phelat.splash.data.repository.photolist.PhotoListRepository
 import com.phelat.splash.data.repository.photolist.PhotoListRepositoryImpl
 import com.phelat.splash.data.request.GetPhotoRequest
@@ -37,25 +38,30 @@ class PhotoListModule {
 
     @Provides
     @ForActivity
-    fun provideGetPhotoListRemoteDataSource(photosAPI: PhotosAPI)
-            : DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>> {
-        return GetPhotosRemoteDataSource(photosAPI)
+    fun provideGetPhotoListRemoteDataSource(
+            photosAPI: PhotosAPI,
+            sigProvider: Provider<Long>
+    ): DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>> {
+        return GetPhotosRemoteDataSource(photosAPI, sigProvider)
     }
 
     @Provides
     @ForActivity
-    fun providePhotoListRepository(remoteDataSource: DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>>,
-                                   photoResponseToPhotoEntity: Mapper<PhotosResponse, PhotoEntity>)
-            : PhotoListRepository {
+    fun providePhotoListRepository(
+            remoteDataSource: DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>>,
+            photoResponseToPhotoEntity: Mapper<PhotosResponse, PhotoEntity>
+    ): PhotoListRepository {
         return PhotoListRepositoryImpl(remoteDataSource, photoResponseToPhotoEntity)
     }
 
     @Provides
     @ForActivity
-    fun providePhotoListPresenter(repository: PhotoListRepository,
-                                  compositeDisposable: CompositeDisposable,
-                                  @MainThreadQ mainThread: SplashThread,
-                                  @BackgroundThreadQ backgroundThread: SplashThread): PhotoListContract.Presenter {
+    fun providePhotoListPresenter(
+            repository: PhotoListRepository,
+            compositeDisposable: CompositeDisposable,
+            @MainThreadQ mainThread: SplashThread,
+            @BackgroundThreadQ backgroundThread: SplashThread
+    ): PhotoListContract.Presenter {
         return PhotoListPresenter(repository, compositeDisposable, mainThread, backgroundThread)
     }
 

@@ -37,14 +37,14 @@ class PhotosAPITest {
     }
 
     @Test
-    fun shouldReturnLatestPhotos() {
+    fun `test if it maps the server result to appropriate data classes`() {
 
         val response = MockResponse()
         response.setResponseCode(200)
         response.setBody(TestUtils.readResource("json/photos/photos_response.json", this.javaClass.classLoader))
         mockWebServer.enqueue(response)
 
-        api.getPhotos(0, 10)
+        api.getPhotos(0, 10, sig = 123)
                 .test()
                 .assertNoErrors()
                 .assertValue {

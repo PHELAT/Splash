@@ -14,11 +14,6 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-/**
- * Created by MAHDi on 6/5/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoListPresenter @Inject constructor(
 
         private val repository: PhotoListRepository,
@@ -31,8 +26,6 @@ class PhotoListPresenter @Inject constructor(
     lateinit var view: PhotoListContract.View
 
     lateinit var viewModel: PhotoListViewModel
-
-    private val newListRequestGap = 0.8
 
     // TODO : USE STATE
     private var isLoading = false
@@ -51,7 +44,7 @@ class PhotoListPresenter @Inject constructor(
     }
 
     override fun onPageScroll() {
-        if (!isLoading && (view.getTotalItems() * newListRequestGap).roundToInt() <= view.getLastVisibleItem()) {
+        if (!isLoading && (view.getTotalItems() * NEW_LIST_REQUEST_GAP).roundToInt() <= view.getLastVisibleItem()) {
             fetchPhotos()
         }
     }
@@ -68,6 +61,7 @@ class PhotoListPresenter @Inject constructor(
                     getPhotoRequest = getPhotoRequest.copy(getPhotoRequest.page + 1)
                 }
                 .subscribe(viewModel, Consumer { throwable ->
+                    // TODO : handle throwable and maybe show an appropriate message to user
                     if (BuildConfig.DEBUG) {
                         throwable.printStackTrace()
                     }
@@ -77,6 +71,12 @@ class PhotoListPresenter @Inject constructor(
 
     override fun unsubscribe() {
         compositeDisposable.clear()
+    }
+
+    companion object {
+
+        private const val NEW_LIST_REQUEST_GAP = 0.8
+
     }
 
 }

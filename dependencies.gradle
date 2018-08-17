@@ -29,7 +29,8 @@ ext {
             junit             : "4.12",
             supportTestRunner : "1.0.2",
             espresso          : "3.0.2",
-            mockito           : "2.18.3"
+            mockito           : "2.8.8",
+            powerMock         : "1.7.1",
     ]
 
 }

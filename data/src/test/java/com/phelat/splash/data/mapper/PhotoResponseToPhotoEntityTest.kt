@@ -27,7 +27,7 @@ class PhotoResponseToPhotoEntityTest {
     }
 
     @Test
-    fun shouldMapPhotosResponseToPhotoEntity() {
+    fun `test if it maps photosResponse to photoEntity`() {
 
         val photosResponse = Gson().fromJson(TestUtils.readResource("json/photos/photos_response.json",
                 this.javaClass.classLoader),
@@ -51,7 +51,7 @@ class PhotoResponseToPhotoEntityTest {
     }
 
     @Test
-    fun shouldMapPhotoEntityToPhotosResponse() {
+    fun `test if it maps photoEntity to photosResponse`() {
 
         val photosResponse = Gson().fromJson(TestUtils.readResource("json/photos/photos_response.json",
                 this.javaClass.classLoader),
