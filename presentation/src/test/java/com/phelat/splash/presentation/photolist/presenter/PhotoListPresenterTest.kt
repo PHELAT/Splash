@@ -1,5 +1,6 @@
 package com.phelat.splash.presentation.photolist.presenter
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.executors.base.SplashThread
@@ -12,33 +13,36 @@ import io.reactivex.schedulers.Schedulers
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.mockito.Spy
-import org.mockito.junit.MockitoJUnitRunner
+import org.powermock.modules.junit4.PowerMockRunner
+import org.powermock.reflect.Whitebox
 
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(PowerMockRunner::class)
 class PhotoListPresenterTest {
 
-    @Spy
+    @Rule
+    @JvmField
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Mock
     lateinit var repository: PhotoListRepository
 
-    @Spy
-    lateinit var compositeDisposable: CompositeDisposable
-
-    @Spy
+    @Mock
     lateinit var splashThread: SplashThread
 
     @Mock
     lateinit var viewModel: PhotoListViewModel
 
-    @InjectMocks
     @Spy
+    val compositeDisposable = CompositeDisposable()
+
     lateinit var presenter: PhotoListPresenter
 
     @Before
@@ -48,6 +52,11 @@ class PhotoListPresenterTest {
 
         `when`(splashThread.getScheduler())
                 .thenReturn(Schedulers.trampoline())
+
+        presenter = PhotoListPresenter(repository,
+                compositeDisposable,
+                splashThread,
+                splashThread)
     }
 
     @Test
@@ -61,7 +70,7 @@ class PhotoListPresenterTest {
     }
 
     @Test
-    fun `should fetch list of photos when setUp`() {
+    fun `should fetch list of photos when setUp and viewModel has no data`() {
 
         `when`(repository.getListOfPhotos(Mockito.any()))
                 .thenReturn(Single.just(ArrayList()))
@@ -72,6 +81,20 @@ class PhotoListPresenterTest {
         presenter.setUp(viewModel)
 
         verify(repository, times(1)).getListOfPhotos(Mockito.any())
+    }
+
+    @Test
+    fun `should not fetch list of photos when viewModel already has data`() {
+
+        val liveData = MutableLiveData<MutableList<PhotoEntity>>()
+        liveData.value = ArrayList()
+
+        `when`(viewModel.photosObservable)
+                .thenReturn(liveData)
+
+        presenter.setUp(viewModel)
+
+        verify(repository, never()).getListOfPhotos(Mockito.any())
     }
 
     @Test
@@ -141,6 +164,8 @@ class PhotoListPresenterTest {
                 .`when`(view)
                 .getLastVisibleItem()
 
+        presenter.viewModel = viewModel
+
         presenter.subscribe(view)
 
         presenter.onPageScroll()
@@ -160,6 +185,20 @@ class PhotoListPresenterTest {
         doReturn(18)
                 .`when`(view)
                 .getLastVisibleItem()
+
+        presenter.subscribe(view)
+
+        presenter.onPageScroll()
+
+        verify(repository, never()).getListOfPhotos(Mockito.any())
+    }
+
+    @Test
+    fun `should not request for new page when already requested for new page!`() {
+
+        val view = mock(PhotoListContract.View::class.java)
+
+        Whitebox.setInternalState(presenter, "isLoading", true)
 
         presenter.subscribe(view)
 
