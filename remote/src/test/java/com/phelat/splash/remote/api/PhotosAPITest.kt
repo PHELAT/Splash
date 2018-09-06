@@ -1,6 +1,5 @@
 package com.phelat.splash.remote.api
 
-import com.phelat.splash.remote.di.DaggerNetworkComponent
 import com.phelat.splash.remote.di.NetworkModule
 import com.phelat.splash.remote.utils.TestUtils
 import okhttp3.mockwebserver.MockResponse
@@ -10,11 +9,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-
-/**
- * Created by MAHDi on 5/31/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
 
 @RunWith(JUnit4::class)
 class PhotosAPITest {

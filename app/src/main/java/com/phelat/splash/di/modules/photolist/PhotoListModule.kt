@@ -22,11 +22,6 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module(includes = [ProvidersModule::class])
 class PhotoListModule {
 

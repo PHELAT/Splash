@@ -11,11 +11,6 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class SplashModule(private val application: Application) {
 

@@ -17,11 +17,6 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by MAHDi on 6/4/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @RunWith(MockitoJUnitRunner::class)
 class GetPhotosRemoteDataSourceTest {
 

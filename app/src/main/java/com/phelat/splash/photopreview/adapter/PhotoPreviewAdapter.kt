@@ -9,11 +9,6 @@ import com.phelat.splash.photopreview.holder.PhotoPreviewHolder
 import com.phelat.splash.photopreview.utils.PhotoListDiffUtil
 import com.phelat.splash.utils.inflate
 
-/**
- * Created by MAHDi on 6/21/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoPreviewAdapter(
 
         private val items: MutableList<PhotoEntity>

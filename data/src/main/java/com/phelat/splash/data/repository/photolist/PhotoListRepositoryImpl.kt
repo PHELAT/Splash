@@ -8,11 +8,6 @@ import com.phelat.splash.data.response.PhotosResponse
 import io.reactivex.Single
 import javax.inject.Inject
 
-/**
- * Created by MAHDi on 6/4/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoListRepositoryImpl @Inject constructor(
 
         private val remoteDataSource: DataSource.SingleReadable<GetPhotoRequest, List<PhotosResponse>>,

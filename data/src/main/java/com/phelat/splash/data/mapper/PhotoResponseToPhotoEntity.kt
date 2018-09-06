@@ -4,11 +4,6 @@ import com.phelat.splash.data.entity.PhotoEntity
 import com.phelat.splash.data.entity.UserEntity
 import com.phelat.splash.data.response.PhotosResponse
 
-/**
- * Created by MAHDi on 6/4/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoResponseToPhotoEntity : Mapper<PhotosResponse, PhotoEntity> {
 
     override fun mapFromTo(from: PhotosResponse): PhotoEntity {

@@ -4,11 +4,6 @@ import com.phelat.splash.data.mapper.Mapper
 import com.phelat.splash.data.model.PhotoUrlsData
 import com.phelat.splash.presentation.model.ParcelPhotoUrlsData
 
-/**
- * Created by MAHDi on 7/13/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoUrlsDataToParcelPhotoUrlsData : Mapper<PhotoUrlsData?, ParcelPhotoUrlsData?> {
 
     override fun mapFromTo(from: PhotoUrlsData?): ParcelPhotoUrlsData? {

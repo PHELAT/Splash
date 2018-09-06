@@ -7,11 +7,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-/**
- * Created by MAHDi on 5/31/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 interface PhotosAPI {
 
     @GET("/photos")

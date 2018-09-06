@@ -3,11 +3,6 @@ package com.phelat.splash.photopreview.utils
 import android.support.v7.util.DiffUtil
 import com.phelat.splash.data.entity.PhotoEntity
 
-/**
- * Created by MAHDi on 7/13/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoListDiffUtil(
 
         private val newItems: MutableList<PhotoEntity>,

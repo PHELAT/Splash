@@ -22,11 +22,6 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
-/**
- * Created by MAHDi on 5/31/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class NetworkModule(private val baseUrl: String,
                     private val readTimeout: Long = 30,

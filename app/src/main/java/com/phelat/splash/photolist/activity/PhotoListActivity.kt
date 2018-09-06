@@ -17,11 +17,6 @@ import com.phelat.splash.utils.splashComponent
 import kotlinx.android.synthetic.main.photo_list_activity.*
 import javax.inject.Inject
 
-/**
- * Created by MAHDi on 6/6/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(), PhotoListContract.View {
 
     @Inject
