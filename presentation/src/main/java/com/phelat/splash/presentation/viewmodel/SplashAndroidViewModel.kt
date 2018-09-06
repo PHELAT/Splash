@@ -4,5 +4,8 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import io.reactivex.functions.Consumer
 
-abstract class SplashAndroidViewModel<InputType>(application: Application)
-    : AndroidViewModel(application), Consumer<InputType>
+abstract class SplashAndroidViewModel<InputType>(
+
+        application: Application
+
+) : AndroidViewModel(application), Consumer<InputType>

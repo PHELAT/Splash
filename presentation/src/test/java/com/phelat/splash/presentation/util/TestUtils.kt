@@ -1,4 +1,4 @@
-package com.phelat.splash.data.util
+package com.phelat.splash.presentation.util
 
 import java.io.BufferedReader
 import java.io.File

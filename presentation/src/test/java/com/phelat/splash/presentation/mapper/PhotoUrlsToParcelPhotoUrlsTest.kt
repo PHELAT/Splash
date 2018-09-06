@@ -6,8 +6,8 @@ import com.phelat.splash.data.mapper.Mapper
 import com.phelat.splash.data.mapper.PhotoResponseToPhotoEntity
 import com.phelat.splash.data.model.PhotoUrlsData
 import com.phelat.splash.data.response.PhotosResponse
-import com.phelat.splash.data.util.TestUtils
 import com.phelat.splash.presentation.model.ParcelPhotoUrlsData
+import com.phelat.splash.presentation.util.TestUtils
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual
 import org.hamcrest.core.IsNull

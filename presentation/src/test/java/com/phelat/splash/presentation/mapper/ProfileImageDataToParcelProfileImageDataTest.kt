@@ -8,8 +8,8 @@ import com.phelat.splash.data.mapper.Mapper
 import com.phelat.splash.data.mapper.PhotoResponseToPhotoEntity
 import com.phelat.splash.data.model.ProfileImageData
 import com.phelat.splash.data.response.PhotosResponse
-import com.phelat.splash.data.util.TestUtils
 import com.phelat.splash.presentation.model.ParcelProfileImageData
+import com.phelat.splash.presentation.util.TestUtils
 import org.hamcrest.MatcherAssert
 import org.hamcrest.core.IsEqual
 import org.junit.Before

@@ -7,7 +7,8 @@ import com.phelat.splash.data.response.PhotosResponse
 class PhotoResponseToPhotoEntity : Mapper<PhotosResponse, PhotoEntity> {
 
     override fun mapFromTo(from: PhotosResponse): PhotoEntity {
-        return PhotoEntity(from.id,
+        return PhotoEntity(
+                from.id,
                 from.createdAt,
                 from.updatedAt,
                 from.width,
@@ -18,11 +19,13 @@ class PhotoResponseToPhotoEntity : Mapper<PhotosResponse, PhotoEntity> {
                 from.user?.id,
                 from.user?.name,
                 from.user?.profileImage,
-                from.urls)
+                from.urls
+        )
     }
 
     override fun mapToFrom(to: PhotoEntity): PhotosResponse {
-        return PhotosResponse(to.id,
+        return PhotosResponse(
+                to.id,
                 to.createdAt,
                 to.updatedAt,
                 to.width,
@@ -30,7 +33,8 @@ class PhotoResponseToPhotoEntity : Mapper<PhotosResponse, PhotoEntity> {
                 to.color,
                 to.likes,
                 to.description,
-                UserEntity(to.userId,
+                UserEntity(
+                        to.userId,
                         "",
                         to.usersName,
                         "",
@@ -41,8 +45,10 @@ class PhotoResponseToPhotoEntity : Mapper<PhotosResponse, PhotoEntity> {
                         -1,
                         "",
                         "",
-                        to.userProfileImage),
-                to.photoUrls)
+                        to.userProfileImage
+                ),
+                to.photoUrls
+        )
     }
 
 }

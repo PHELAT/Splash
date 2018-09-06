@@ -28,8 +28,13 @@ constructor(sslContext: SSLContext) : SSLSocketFactory() {
     }
 
     @Throws(IOException::class)
-    override fun createSocket(s: Socket, host: String, port: Int, autoClose: Boolean): Socket? {
-        return enableTLSOnSocket(delegate.createSocket(s, host, port, autoClose))
+    override fun createSocket(
+            socket: Socket,
+            host: String,
+            port: Int,
+            autoClose: Boolean
+    ): Socket? {
+        return enableTLSOnSocket(delegate.createSocket(socket, host, port, autoClose))
     }
 
     @Throws(IOException::class)
@@ -38,8 +43,18 @@ constructor(sslContext: SSLContext) : SSLSocketFactory() {
     }
 
     @Throws(IOException::class)
-    override fun createSocket(host: String, port: Int, localHost: InetAddress, localPort: Int): Socket? {
-        return enableTLSOnSocket(delegate.createSocket(host, port, localHost, localPort))
+    override fun createSocket(
+            host: String,
+            port: Int,
+            localHost: InetAddress,
+            localPort: Int
+    ): Socket? {
+        return enableTLSOnSocket(delegate.createSocket(
+                host,
+                port,
+                localHost,
+                localPort
+        ))
     }
 
     @Throws(IOException::class)
@@ -48,8 +63,18 @@ constructor(sslContext: SSLContext) : SSLSocketFactory() {
     }
 
     @Throws(IOException::class)
-    override fun createSocket(address: InetAddress, port: Int, localAddress: InetAddress, localPort: Int): Socket? {
-        return enableTLSOnSocket(delegate.createSocket(address, port, localAddress, localPort))
+    override fun createSocket(
+            address: InetAddress,
+            port: Int, localAddress:
+            InetAddress,
+            localPort: Int
+    ): Socket? {
+        return enableTLSOnSocket(delegate.createSocket(
+                address,
+                port,
+                localAddress,
+                localPort
+        ))
     }
 
     private fun enableTLSOnSocket(socket: Socket?): Socket? {

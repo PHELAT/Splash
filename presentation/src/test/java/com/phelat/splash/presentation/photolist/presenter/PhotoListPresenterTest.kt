@@ -43,7 +43,7 @@ class PhotoListPresenterTest {
     @Spy
     val compositeDisposable = CompositeDisposable()
 
-    lateinit var presenter: PhotoListPresenter
+    private lateinit var presenter: PhotoListPresenter
 
     @Before
     fun setUp() {

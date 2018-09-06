@@ -17,7 +17,7 @@ interface DataSource {
 
     }
 
-    interface CompleteCreatable<InputType> {
+    interface CompletableCreatable<InputType> {
 
         fun read(input: InputType? = null): Completable
 

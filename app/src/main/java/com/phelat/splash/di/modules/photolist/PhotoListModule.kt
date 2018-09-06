@@ -57,7 +57,12 @@ class PhotoListModule {
             @MainThreadQ mainThread: SplashThread,
             @BackgroundThreadQ backgroundThread: SplashThread
     ): PhotoListContract.Presenter {
-        return PhotoListPresenter(repository, compositeDisposable, mainThread, backgroundThread)
+        return PhotoListPresenter(
+                repository,
+                compositeDisposable,
+                mainThread,
+                backgroundThread
+        )
     }
 
 }

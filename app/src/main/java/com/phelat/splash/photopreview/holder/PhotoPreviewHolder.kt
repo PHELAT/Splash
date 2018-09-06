@@ -19,14 +19,6 @@ import kotlin.math.roundToInt
 
 class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    companion object {
-
-        const val REQUIRED_WIDTH = 1.3
-
-        const val LOADING_EVALUATOR_DURATION = 1000L
-
-    }
-
     val root: ConstraintLayout = view.root
 
     val splash: AppCompatImageView = view.splash
@@ -84,6 +76,14 @@ class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
         params.width = width.roundToInt()
 
         root.layoutParams = params
+    }
+
+    companion object {
+
+        const val REQUIRED_WIDTH = 1.3
+
+        const val LOADING_EVALUATOR_DURATION = 1000L
+
     }
 
 }

@@ -6,6 +6,8 @@ import io.reactivex.Single
 
 interface PhotoListRepository {
 
-    fun getListOfPhotos(request: GetPhotoRequest? = null): Single<MutableList<PhotoEntity>>
+    fun getListOfPhotos(
+            request: GetPhotoRequest? = null
+    ): Single<MutableList<PhotoEntity>>
 
 }

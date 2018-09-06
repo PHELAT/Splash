@@ -34,8 +34,10 @@ class SplashModule(private val application: Application) {
 
     @Provides
     @ForApplication
-    fun providePicasso(context: Context,
-                       okHttp3Downloader: OkHttp3Downloader): Picasso {
+    fun providePicasso(
+            context: Context,
+            okHttp3Downloader: OkHttp3Downloader
+    ): Picasso {
         return Picasso.Builder(context)
                 .downloader(okHttp3Downloader)
                 .loggingEnabled(BuildConfig.DEBUG)
