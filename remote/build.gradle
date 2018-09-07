@@ -26,7 +26,7 @@ android {
     }
     buildTypes.each {
         Properties properties = new Properties()
-        properties.load(rootProject.file('local.properties').newDataInputStream())
+        properties.load(rootProject.file('splash.properties').newDataInputStream())
         it.buildConfigField 'String', 'CLIEND_ID', "\"${properties.getProperty('clientId')}\""
     }
 }
