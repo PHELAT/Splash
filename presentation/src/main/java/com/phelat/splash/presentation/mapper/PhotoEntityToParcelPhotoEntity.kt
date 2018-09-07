@@ -8,11 +8,6 @@ import com.phelat.splash.presentation.entity.ParcelPhotoEntity
 import com.phelat.splash.presentation.model.ParcelPhotoUrlsData
 import com.phelat.splash.presentation.model.ParcelProfileImageData
 
-/**
- * Created by MAHDi on 7/13/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoEntityToParcelPhotoEntity(
 
         private val photoUrlsDataMapper: Mapper<PhotoUrlsData?, ParcelPhotoUrlsData?>,

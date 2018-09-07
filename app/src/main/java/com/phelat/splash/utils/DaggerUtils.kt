@@ -6,11 +6,6 @@ import com.phelat.splash.SplashApplication
 import com.phelat.splash.di.SplashComponent
 import com.phelat.splash.remote.di.NetworkComponent
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 val AppCompatActivity.splashComponent: SplashComponent
     get() {
     return (this.application as SplashApplication).splashComponent

@@ -17,20 +17,7 @@ import kotlinx.android.synthetic.main.photo_list_item.view.*
 import kotlinx.android.synthetic.main.photo_list_shimmer.view.*
 import kotlin.math.roundToInt
 
-/**
- * Created by MAHDi on 7/13/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    companion object {
-
-        const val REQUIRED_WIDTH = 1.3
-
-        const val LOADING_EVALUATOR_DURATION = 1000L
-
-    }
 
     val root: ConstraintLayout = view.root
 
@@ -89,6 +76,14 @@ class PhotoPreviewHolder(view: View) : RecyclerView.ViewHolder(view) {
         params.width = width.roundToInt()
 
         root.layoutParams = params
+    }
+
+    companion object {
+
+        const val REQUIRED_WIDTH = 1.3
+
+        const val LOADING_EVALUATOR_DURATION = 1000L
+
     }
 
 }

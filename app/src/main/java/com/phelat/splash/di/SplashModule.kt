@@ -11,11 +11,6 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class SplashModule(private val application: Application) {
 
@@ -39,8 +34,10 @@ class SplashModule(private val application: Application) {
 
     @Provides
     @ForApplication
-    fun providePicasso(context: Context,
-                       okHttp3Downloader: OkHttp3Downloader): Picasso {
+    fun providePicasso(
+            context: Context,
+            okHttp3Downloader: OkHttp3Downloader
+    ): Picasso {
         return Picasso.Builder(context)
                 .downloader(okHttp3Downloader)
                 .loggingEnabled(BuildConfig.DEBUG)

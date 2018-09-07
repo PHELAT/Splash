@@ -10,11 +10,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-/**
- * Created by MAHDi on 7/5/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @RunWith(JUnit4::class)
 class EmptyPhotoEntityProviderTest {
 

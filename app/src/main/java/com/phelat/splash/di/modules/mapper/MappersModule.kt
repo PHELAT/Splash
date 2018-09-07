@@ -14,11 +14,6 @@ import com.phelat.splash.presentation.model.ParcelProfileImageData
 import dagger.Module
 import dagger.Provides
 
-/**
- * Created by MAHDi on 7/13/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class MappersModule {
 

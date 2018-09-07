@@ -2,11 +2,6 @@ package com.phelat.splash.data.entity
 
 import com.phelat.splash.data.model.ProfileImageData
 
-/**
- * Created by MAHDi on 5/31/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 data class UserEntity(
 
         val id: String?,

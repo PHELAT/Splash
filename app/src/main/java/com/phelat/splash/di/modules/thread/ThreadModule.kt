@@ -9,11 +9,6 @@ import com.phelat.splash.presentation.executors.qualifiers.MainThreadQ
 import dagger.Module
 import dagger.Provides
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class ThreadModule {
 

@@ -6,11 +6,6 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 
-/**
- * Created by MAHDi on 5/31/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class ApiModule {
 

@@ -3,11 +3,6 @@ package com.phelat.splash.data.entity
 import com.phelat.splash.data.model.PhotoUrlsData
 import com.phelat.splash.data.model.ProfileImageData
 
-/**
- * Created by MAHDi on 6/4/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 data class PhotoEntity(
 
         val id: String?,

@@ -5,11 +5,6 @@ import android.widget.Toast
 import com.phelat.splash.presentation.presenter.BasePresenter
 import com.phelat.splash.presentation.view.BaseView
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 abstract class SplashActivity<Presenter : BasePresenter<*>> : AppCompatActivity(), BaseView<Presenter> {
 
     override fun showToast(message: Int) {

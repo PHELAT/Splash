@@ -3,11 +3,6 @@ package com.phelat.splash.data.datasource
 import io.reactivex.Completable
 import io.reactivex.Single
 
-/**
- * Created by MAHDi on 6/4/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 interface DataSource {
 
     interface SingleCreatable<InputType, OutputType> {
@@ -22,7 +17,7 @@ interface DataSource {
 
     }
 
-    interface CompleteCreatable<InputType> {
+    interface CompletableCreatable<InputType> {
 
         fun read(input: InputType? = null): Completable
 

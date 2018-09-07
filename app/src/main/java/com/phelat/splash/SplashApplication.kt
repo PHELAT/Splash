@@ -11,11 +11,6 @@ import com.phelat.splash.remote.di.NetworkModule
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-/**
- * Created by MAHDi on 6/16/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class SplashApplication : Application() {
 
     @Inject

@@ -17,11 +17,6 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by MAHDi on 6/4/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @RunWith(MockitoJUnitRunner::class)
 class GetPhotosRemoteDataSourceTest {
 
@@ -62,7 +57,8 @@ class GetPhotosRemoteDataSourceTest {
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, times(1)).getPhotos(input.page, input.perPage, input.orderBy, 123)
+        verify(photosAPI, times(1))
+                .getPhotos(input.page, input.perPage, input.orderBy, 123)
     }
 
     @Test
@@ -80,7 +76,8 @@ class GetPhotosRemoteDataSourceTest {
                 .assertNoErrors()
                 .assertComplete()
 
-        verify(photosAPI, times(1)).getPhotos(1, sig = 123)
+        verify(photosAPI, times(1))
+                .getPhotos(1, sig = 123)
     }
 
 }

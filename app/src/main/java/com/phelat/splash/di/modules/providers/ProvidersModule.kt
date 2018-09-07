@@ -10,11 +10,6 @@ import com.phelat.splash.remote.provider.SigProvider
 import dagger.Module
 import dagger.Provides
 
-/**
- * Created by MAHDi on 6/27/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class ProvidersModule {
 

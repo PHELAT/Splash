@@ -22,11 +22,6 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
-/**
- * Created by MAHDi on 5/31/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 @Module
 class NetworkModule(private val baseUrl: String,
                     private val readTimeout: Long = 30,
@@ -83,10 +78,12 @@ class NetworkModule(private val baseUrl: String,
 
     @Provides
     @ForNetwork
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
-                            authorizationInterceptor: AuthorizationInterceptor,
-                            sslSocketFactory: SSLSocketFactory,
-                            trustManager: X509TrustManager): OkHttpClient {
+    fun provideOkHttpClient(
+            loggingInterceptor: HttpLoggingInterceptor,
+            authorizationInterceptor: AuthorizationInterceptor,
+            sslSocketFactory: SSLSocketFactory,
+            trustManager: X509TrustManager
+    ): OkHttpClient {
         return OkHttpClient.Builder()
                 .readTimeout(readTimeout, TimeUnit.SECONDS)
                 .writeTimeout(writeTimeout, TimeUnit.SECONDS)
@@ -99,7 +96,10 @@ class NetworkModule(private val baseUrl: String,
 
     @Provides
     @ForNetwork
-    fun provideRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
+    fun provideRetrofit(
+            okHttpClient: OkHttpClient,
+            gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(okHttpClient)

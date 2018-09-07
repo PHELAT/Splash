@@ -4,11 +4,6 @@ import com.phelat.splash.data.mapper.Mapper
 import com.phelat.splash.data.model.ProfileImageData
 import com.phelat.splash.presentation.model.ParcelProfileImageData
 
-/**
- * Created by MAHDi on 7/13/18.
- * Contact me m4hdi.pdroid at gmail.com
- */
-
 class ProfileImageDataToParcelProfileImageData : Mapper<ProfileImageData?, ParcelProfileImageData?> {
 
     override fun mapFromTo(from: ProfileImageData?): ParcelProfileImageData? {
