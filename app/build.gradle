@@ -33,7 +33,7 @@ android {
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(rootProject.file('splash.properties').newDataInputStream())
-        it.buildConfigField 'String', 'BASE_URL', properties.getProperty('baseUrl')
+        it.buildConfigField 'String', 'BASE_URL', "\"${properties.getProperty('baseUrl')}\""
     }
 }
 
