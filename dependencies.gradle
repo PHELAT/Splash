@@ -1,13 +1,13 @@
 ext {
 
     buildVersions = [
-            compileSdkVersion : 27,
-            buildToolsVersion : "27.0.3"
+            compileSdkVersion : 28,
+            buildToolsVersion : "28.0.3"
     ]
 
     sdkVersions = [
             minSdkVersion : 15,
-            targetSdkVersion : 27
+            targetSdkVersion : 28
     ]
 
     libraryVersions = [
