@@ -47,7 +47,7 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(), PhotoLi
         previewRecycler.layoutManager = layoutManager
         previewRecycler.adapter = photoListAdapter
         previewRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 presenter.onPageScroll()
             }
@@ -76,11 +76,8 @@ class PhotoListActivity : SplashActivity<PhotoListContract.Presenter>(), PhotoLi
     }
 
     override fun onDestroy() {
-
         presenter.unsubscribe()
-
         photoListViewModel.photosObservable.removeObservers(this)
-
         super.onDestroy()
     }
 
